@@ -10,12 +10,15 @@ This project aiming to learn Mean Stack with TypeScript in depth.
 
 ## Getting Started
 https://www.tutorialspoint.com/typescript/typescript_overview.htm
+
 https://nodejs.org/en/docs/guides/getting-started-guide/
+
 https://angular.io/start
 
 ### Dependencies
 
 node: 12.9.1
+
 npm: 6.10.2
 
 ### Installing
@@ -25,6 +28,7 @@ npm install
 ### Executing program
 
 npm run start-dev
+
 navigate to: http://localhost:3001/api/say-hello/Maximilian
 
 ## Help
