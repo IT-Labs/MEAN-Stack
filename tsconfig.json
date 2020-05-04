@@ -1,5 +1,7 @@
 {
     "compileOnSave": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "compilerOptions": {
       "module": "commonjs",
       "strict": true,
