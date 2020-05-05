@@ -19,7 +19,7 @@ class CompaniesController{
     private getAll(req: Request, res: Response) {
         const CompanyModel = new Companies().getModelForClass(Companies);
             (async () => {
-                await CompanyModel.find(function(err,result){
+                await CompanyModel.find((err,result) =>{
                     if(err){
                         res.send(err);
                         return;
@@ -33,7 +33,7 @@ class CompaniesController{
     private getById(req: Request, res: Response) {
         const CompanyModel = new Companies().getModelForClass(Companies);
             (async () => {
-                await CompanyModel.findById({_id: req.params.id}, function(err,result){
+                await CompanyModel.findById({_id: req.params.id}, (err,result) => {
                     if(err){
                         res.send(err);
                         return;
@@ -56,7 +56,7 @@ class CompaniesController{
                 state: req.body.state,
                 country: req.body.country
         });
-        company.save(function(err,result){
+        company.save((err,result) => {
             if(err){
                 res.send(err);
                 return;
@@ -79,7 +79,7 @@ class CompaniesController{
                 state: req.body.state,
                 country: req.body.country
         });
-        CompanyModel.findByIdAndUpdate(req.params.id, company, function(err, result){
+        CompanyModel.findByIdAndUpdate(req.params.id, company, (err, result) => {
             if(err){
                 res.send(err);
                 return;
@@ -93,7 +93,7 @@ class CompaniesController{
     private deleteById(req: Request, res: Response){
         const CompanyModel = new Companies().getModelForClass(Companies);
         (async () => {
-        CompanyModel.deleteOne({_id : req.params.id}, function(err: string){
+        CompanyModel.deleteOne({_id : req.params.id}, (err: string) => {
             if(err){
                 res.send(err);
                 return;
