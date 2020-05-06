@@ -4,6 +4,8 @@ import * as bodyParser from "body-parser";
 import { Server } from "@overnightjs/core";
 import { Logger } from "@overnightjs/logger";
 import TestController from "./controllers/test-controller";
+import BanksController from './controllers/banks-controller';
+import CompaniesController from './controllers/companies-controller';
 
 class MeanStackServer extends Server {
   private readonly SERVER_START_MSG = "Server started on port: ";
@@ -15,7 +17,12 @@ class MeanStackServer extends Server {
     super(true);
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
-    super.addControllers(new TestController());
+
+    const banksController = new BanksController();
+    const companiesController = new CompaniesController();
+    const testController = new TestController()
+
+    super.addControllers([banksController, companiesController, testController]);
 
     // Point to front-end code
     this.serveFrontEndProd();

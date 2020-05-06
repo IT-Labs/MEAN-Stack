@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\server",
+    "\\src\\server\\controllers"
+  ],
+  "SelectedNode": "\\src\\server\\controllers\\banks-controller.ts",
+  "PreviewInSolutionExplorer": false
+}
