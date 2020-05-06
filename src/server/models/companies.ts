@@ -1,6 +1,6 @@
-import { prop, Typegoose } from 'typegoose';
+import { prop } from 'typegoose';
 
-export class Companies extends Typegoose{
+export class Companies {
   public id?: string;
   @prop()
   public name?: string;

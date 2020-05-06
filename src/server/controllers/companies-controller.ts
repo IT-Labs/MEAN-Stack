@@ -4,103 +4,129 @@ import { Logger } from '@overnightjs/logger';
 import { Request, Response } from 'express';
 import { Companies } from '../models/companies'
 import * as mongoose from 'mongoose';
-
+import {MongoClient} from 'mongodb';
+import { ObjectID } from 'mongodb';
 
 @Controller('api/companies')
 class CompaniesController{
-
-    constructor(){
-        mongoose.connect('mongodb+srv://testuser:o98wHwKDlGeW7QaK@testcluster-qhjws.mongodb.net/mean_stack?retryWrites=true&w=majority');
-        mongoose.set('useNewUrlParser', true);
-        mongoose.set('useUnifiedTopology', true);
-    }
+    uri =
+        'mongodb+srv://testuser:o98wHwKDlGeW7QaK@testcluster-qhjws.mongodb.net/test?retryWrites=true&w=majority';
+    client = new MongoClient(this.uri, { useUnifiedTopology: true });
 
     @Get()
     private getAll(req: Request, res: Response) {
-        const CompanyModel = new Companies().getModelForClass(Companies);
-            (async () => {
-                await CompanyModel.find((err,result) =>{
-                    if(err){
-                        res.send(err);
-                        return;
-                    }
-                    res.send(result);
-                });
-          })();
+        this.client.connect(err => {
+            if(err){
+                res.send(err);
+                return;
+            }
+            const db = this.client.db('mean_stack');
+            db.collection('companies').find({}).toArray((collectionError, result) => {
+                if (collectionError){
+                    res.send(collectionError);
+                    return;
+                }
+                res.send(result);
+              });
+        });
     }
 
     @Get(':id')
     private getById(req: Request, res: Response) {
-        const CompanyModel = new Companies().getModelForClass(Companies);
-            (async () => {
-                await CompanyModel.findById({_id: req.params.id}, (err,result) => {
-                    if(err){
-                        res.send(err);
+        this.client.connect( err => {
+            if(err){
+                res.send(err);
+                return;
+            }
+            const db = this.client.db('mean_stack');
+            db.collection('companies').findOne({_id : ObjectID.createFromHexString(req.params.id)},
+                (collectionError, result) => {
+                    if (collectionError){
+                        res.send(collectionError);
                         return;
                     }
                     res.send(result);
                 });
-          })();
+        });
     }
 
     @Post()
     private create(req: Request, res: Response){
-        const CompanyModel = new Companies().getModelForClass(Companies);
-        (async () => {
-            const company = new CompanyModel({
-                name: req.body.name,
-                taxNumber: req.body.taxNumber,
-                address: req.body.address,
-                city: req.body.city,
-                zipCode: req.body.zipCode,
-                state: req.body.state,
-                country: req.body.country
-        });
-        company.save((err,result) => {
+        const company = new Companies();
+        company.name = req.body.name;
+        company.taxNumber = req.body.taxNumber;
+        company.address = req.body.address;
+        company.city = req.body.city;
+        company.zipCode = req.body.zipCode;
+        company.state = req.body.state;
+        company.country = req.body.country;
+        company.created = new Date();
+
+        this.client.connect( err => {
             if(err){
                 res.send(err);
                 return;
             }
-            res.send(result);
+            const db = this.client.db('mean_stack');
+            db.collection('companies').insertOne(company,
+                (collectionError, result) =>{
+                    if (collectionError){
+                        res.send(collectionError);
+                        return;
+                    }
+                    res.send(result);
+                });
         });
-      })();
     }
 
     @Put(':id')
     private update(req: Request, res: Response){
-        const CompanyModel = new Companies().getModelForClass(Companies);
-        (async () => {
-            const company = new CompanyModel({
-                name: req.body.name,
-                taxNumber: req.body.taxNumber,
-                address: req.body.address,
-                city: req.body.city,
-                zipCode: req.body.zipCode,
-                state: req.body.state,
-                country: req.body.country
-        });
-        CompanyModel.findByIdAndUpdate(req.params.id, company, (err, result) => {
+        const company = new Companies();
+        company.name = req.body.name;
+        company.taxNumber = req.body.taxNumber;
+        company.address = req.body.address;
+        company.city = req.body.city;
+        company.zipCode = req.body.zipCode;
+        company.state = req.body.state;
+        company.country = req.body.country;
+        company.created = new Date();
+
+        this.client.connect( err => {
             if(err){
                 res.send(err);
                 return;
             }
-            res.send(result)
+            const db = this.client.db('mean_stack');
+            db.collection('companies')
+            .updateOne({_id : ObjectID.createFromHexString(req.params.id)},{$set: company},
+                (collectionError, result) => {
+                    if (collectionError){
+                        res.send(collectionError);
+                        return;
+                    }
+                    res.send(result);
+                });
         });
-      })();
     }
 
     @Delete(':id')
     private deleteById(req: Request, res: Response){
-        const CompanyModel = new Companies().getModelForClass(Companies);
-        (async () => {
-        CompanyModel.deleteOne({_id : req.params.id}, (err: string) => {
+        this.client.connect( err => {
             if(err){
                 res.send(err);
                 return;
             }
-            res.send('Deleted company with id: ' + req.params.id);
+            const db = this.client.db('mean_stack');
+            db.collection('companies')
+            .deleteOne({_id : ObjectID.createFromHexString(req.params.id)},
+                (collectionError, result) => {
+                    if (collectionError){
+                        res.send(collectionError);
+                        return;
+                    }
+                    res.send(result);
+                });
         });
-      })();
     }
 }
 
