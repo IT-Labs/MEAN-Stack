@@ -17,7 +17,6 @@ class CompaniesController{
 
     @Get()
     private getAll(req: Request, res: Response) {
-        // this is get all companies endpoint
         const CompanyModel = new Companies().getModelForClass(Companies);
             (async () => {
                 await CompanyModel.find((err,result) =>{
