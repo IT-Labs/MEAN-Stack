@@ -1,5 +1,5 @@
 import { OK, BAD_REQUEST } from "http-status-codes";
-import { Controller, Get, Post, Put, Delete} from "@overnightjs/core";
+import { Controller, Get, Post, Put, Delete } from "@overnightjs/core";
 import { Request, Response } from "express";
 import { Logger } from "@overnightjs/logger";
 import { BankService } from "../services/bank-service";
@@ -51,7 +51,7 @@ export class BanksController {
       );
 
       Logger.Info(req.body, true);
-      return res.status(OK).json({id: obj.insertedId});
+      return res.status(OK).json({ id: obj.insertedId });
     } catch (err) {
       Logger.Err(err, true);
       return res.status(BAD_REQUEST).json({
@@ -83,12 +83,19 @@ export class BanksController {
 
   @Delete(":id")
   private async delete(req: Request, res: Response) {
-    let bankService = new BankService();
-    await bankService.connect();
-    let ret = await bankService.delete(req.params.id);
+    try {
+      let bankService = new BankService();
+      await bankService.connect();
+      let ret = await bankService.delete(req.params.id);
 
-    Logger.Info("Delete: " + req.params.id, true);
-    return res.status(OK).json(ret);
+      Logger.Info("Delete: " + req.params.id, true);
+      return res.status(OK).json(ret);
+    } catch (err) {
+      Logger.Err(err, true);
+      return res.status(BAD_REQUEST).json({
+        error: err.message,
+      });
+    }
   }
 
   @Get(/ane/) // Rexes supported. Matches /lane, /cane, etc.

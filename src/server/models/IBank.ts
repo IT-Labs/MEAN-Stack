@@ -4,3 +4,5 @@ export interface IBank  {
   swiftCode?: string;
   created?: Date;
 }
+
+

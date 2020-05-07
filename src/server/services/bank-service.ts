@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { IBank } from "../models/Bank";
+import { IBank } from "../models/IBank";
 const ObjectId = require("mongodb").ObjectID;
 
 export class BankService {
