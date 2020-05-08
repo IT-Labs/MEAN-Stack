@@ -16,7 +16,6 @@ export class Companies {
   public state?: string;
   @prop()
   public country?: string;
-  @prop({default: new Date()})
+  @prop({ default: new Date() })
   public created?: Date;
 }
-
