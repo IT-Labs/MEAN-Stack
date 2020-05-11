@@ -3,8 +3,10 @@
     "",
     "\\src",
     "\\src\\server",
-    "\\src\\server\\controllers"
+    "\\src\\server\\controllers",
+    "\\src\\server\\models",
+    "\\src\\server\\services"
   ],
-  "SelectedNode": "\\src\\server\\controllers\\test-controller.ts",
+  "SelectedNode": "\\src\\server\\services\\company-service.ts",
   "PreviewInSolutionExplorer": false
 }
