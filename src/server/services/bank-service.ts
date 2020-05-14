@@ -1,12 +1,13 @@
-import { MongoClient } from "mongodb";
-import { IBank } from "../models/IBank";
-const ObjectId = require("mongodb").ObjectID;
+import { MongoClient } from 'mongodb';
+import { IBank } from '../models/IBank';
+import MeanStackServer from '../mean-stack-server';
+const ObjectId = require('mongodb').ObjectID;
 
 export class BankService {
-  db: string = "mean_stack";
-  collection: string = "banks";
+  collection: string = 'banks';
+  db: string = 'mean_stack';
   uri: string =
-    "mongodb+srv://testuser:o98wHwKDlGeW7QaK@testcluster-qhjws.mongodb.net/test?retryWrites=true&w=majority";
+    'mongodb+srv://testuser:o98wHwKDlGeW7QaK@testcluster-qhjws.mongodb.net/test?retryWrites=true&w=majority';
 
   client: MongoClient;
 
@@ -35,8 +36,8 @@ export class BankService {
 
   public async create(name: string, swiftCode: string) {
     const bank: IBank = {
-      name: name,
-      swiftCode: swiftCode,
+      name,
+      swiftCode,
       created: new Date(),
     };
     return await this.client
@@ -46,8 +47,8 @@ export class BankService {
   }
 
   public async update(id: string, name: string, swiftCode: string) {
-    var query = { _id: new ObjectId(id) };
-    var newvalues = { $set: { name: name, swiftCode: swiftCode } };
+    const query = { _id: new ObjectId(id) };
+    const newvalues = { $set: { name, swiftCode } };
     return await this.client
       .db(this.db)
       .collection(this.collection)
@@ -55,7 +56,7 @@ export class BankService {
   }
 
   public async delete(id: string) {
-    var query = { _id: new ObjectId(id) };
+    const query = { _id: new ObjectId(id) };
     return await this.client
       .db(this.db)
       .collection(this.collection)

@@ -1,13 +1,13 @@
-import { MongoClient } from "mongodb";
-import { ICompany } from "../models/ICompany";
+import { MongoClient } from 'mongodb';
+import { ICompany } from '../models/ICompany';
 import { ICompanyBank } from '../models/ICompanyBank';
-const ObjectId = require("mongodb").ObjectID;
+const ObjectId = require('mongodb').ObjectID;
 
 export class CompanyService {
-  db: string = "mean_stack";
-  collection: string = "companies";
+  db: string = 'mean_stack';
+  collection: string = 'companies';
   uri: string =
-    "mongodb+srv://testuser:o98wHwKDlGeW7QaK@testcluster-qhjws.mongodb.net/test?retryWrites=true&w=majority";
+    'mongodb+srv://testuser:o98wHwKDlGeW7QaK@testcluster-qhjws.mongodb.net/test?retryWrites=true&w=majority';
 
   client: MongoClient;
 
@@ -34,25 +34,8 @@ export class CompanyService {
       .findOne({ _id: new ObjectId(id) })) as Promise<ICompany>;
   }
 
-  public async create(
-    name: string,
-    taxNumber: string,
-    address: string,
-    city: string,
-    zipcode: string,
-    state: string,
-    country: string
-  ) {
-    const company: ICompany = {
-      name: name,
-      taxNumber: taxNumber,
-      address: address,
-      city: city,
-      zipcode: zipcode,
-      state: state,
-      country: country,
-      created: new Date()
-    };
+  public async create(company: ICompany) {
+
     return await this.client
       .db(this.db)
       .collection(this.collection)
@@ -61,24 +44,18 @@ export class CompanyService {
 
   public async update(
     id: string,
-    name: string,
-    taxNumber: string,
-    address: string,
-    city: string,
-    zipcode: string,
-    state: string,
-    country: string
+    company: ICompany
   ) {
-    var query = { _id: new ObjectId(id) };
-    var newvalues = {
+    const query = { _id: new ObjectId(id) };
+    const newvalues = {
       $set: {
-        name: name,
-        taxNumber: taxNumber,
-        address: address,
-        city: city,
-        zipcode: zipcode,
-        state: state,
-        country: country
+        name: company.name,
+        taxNumber: company.taxNumber,
+        address: company.address,
+        city: company.city,
+        zipcode: company.zipcode,
+        state: company.state,
+        country: company.country
       },
     };
     return await this.client
@@ -88,7 +65,7 @@ export class CompanyService {
   }
 
   public async delete(id: string) {
-    var query = { _id: new ObjectId(id) };
+    const query = { _id: new ObjectId(id) };
     return await this.client
       .db(this.db)
       .collection(this.collection)
@@ -96,22 +73,11 @@ export class CompanyService {
   }
 
   public async addCompanyBank(
-    id: string,    
-    bankId: string,
-    bankName?: string,
-    currency?: string,
-    accountNumber?: string
+    id: string,
+    account: ICompanyBank
   ) {
-    var query = { _id: new ObjectId(id) };
-
-    var companyBank: ICompanyBank = {
-      bankId: bankId,
-      bankName: bankName,
-      currency: currency,
-      accountNumber: accountNumber
-    };
-
-    var newCompanyBankValue = { $push: { companyBanks: companyBank }};
+    const query = { _id: new ObjectId(id) };
+    const newCompanyBankValue = { $push: { companyBanks: account } };
 
     return await this.client
       .db(this.db)
@@ -119,12 +85,11 @@ export class CompanyService {
       .findOneAndUpdate(query, newCompanyBankValue);
   }
 
-  public async deleteCompanyBank(
-    id: string,    
-    bankId: string
-  ) {
-    var query = { _id: new ObjectId(id) };
-    var deleteCompanyBankValue = { $pull: { companyBanks: { bankId: bankId} } }
+  public async deleteCompanyBank(id: string, bankId: string) {
+    const query = { _id: new ObjectId(id) };
+    const deleteCompanyBankValue = {
+      $pull: { companyBanks: { bankId } },
+    };
 
     return await this.client
       .db(this.db)

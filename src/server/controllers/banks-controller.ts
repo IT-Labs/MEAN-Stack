@@ -1,19 +1,23 @@
-import { OK, BAD_REQUEST } from "http-status-codes";
-import { Controller, Get, Post, Put, Delete } from "@overnightjs/core";
-import { Request, Response } from "express";
-import { Logger } from "@overnightjs/logger";
-import { BankService } from "../services/bank-service";
+import { OK, BAD_REQUEST } from 'http-status-codes';
+import { Controller, Get, Post, Put, Delete } from '@overnightjs/core';
+import { Request, Response } from 'express';
+import { Logger } from '@overnightjs/logger';
+import { BankService } from '../services/bank-service';
+import { bankSchema } from '../validators/bank-schema'
 
-@Controller("api/banks")
+@Controller('api/banks')
 export class BanksController {
-  @Get(":id")
+  bankService = new BankService();
+
+  constructor(){
+    this.bankService.connect();
+  }
+
+  @Get(':id')
   private async get(req: Request, res: Response) {
     try {
-      let bankService = new BankService();
-      await bankService.connect();
-      let bank = await bankService.getById(req.params.id);
-
-      Logger.Info("Get: " + req.params.id);
+      const bank = await this.bankService.getById(req.params.id);
+      Logger.Info('Get: ' + req.params.id);
       return res.status(OK).json(bank);
     } catch (err) {
       Logger.Err(err, true);
@@ -23,12 +27,10 @@ export class BanksController {
     }
   }
 
-  @Get("")
+  @Get('')
   private async getAll(req: Request, res: Response) {
     try {
-      let bankService = new BankService();
-      await bankService.connect();
-      let banks = await bankService.getAll();
+      const banks = await this.bankService.getAll();
 
       Logger.Info(req.query, true);
       return res.status(OK).json(banks);
@@ -43,11 +45,11 @@ export class BanksController {
   @Post()
   private async insert(req: Request, res: Response) {
     try {
-      let bankService = new BankService();
-      await bankService.connect();
-      let obj = await bankService.create(
-        req.body["name"],
-        req.body["swiftCode"]
+      const bank = req.body;
+      await bankSchema.validateAsync(bank);
+      const obj = await this.bankService.create(
+        req.body.name,
+        req.body.swiftCode
       );
 
       Logger.Info(req.body, true);
@@ -60,18 +62,18 @@ export class BanksController {
     }
   }
 
-  @Put(":id")
+  @Put(':id')
   private async update(req: Request, res: Response) {
     try {
-      let bankService = new BankService();
-      await bankService.connect();
-      let ret = await bankService.update(
+      const bank = req.body;
+      await bankSchema.validateAsync(bank);
+      const ret = await this.bankService.update(
         req.params.id,
-        req.body["name"],
-        req.body["swiftCode"]
+        req.body.name,
+        req.body.swiftCode
       );
 
-      Logger.Info("Body: " + req.body, true);
+      Logger.Info('Body: ' + req.body, true);
       return res.status(OK).json(ret);
     } catch (err) {
       Logger.Err(err, true);
@@ -81,14 +83,12 @@ export class BanksController {
     }
   }
 
-  @Delete(":id")
+  @Delete(':id')
   private async delete(req: Request, res: Response) {
     try {
-      let bankService = new BankService();
-      await bankService.connect();
-      let ret = await bankService.delete(req.params.id);
+      const ret = await this.bankService.delete(req.params.id);
 
-      Logger.Info("Delete: " + req.params.id, true);
+      Logger.Info('Delete: ' + req.params.id, true);
       return res.status(OK).json(ret);
     } catch (err) {
       Logger.Err(err, true);
@@ -101,11 +101,11 @@ export class BanksController {
   @Get(/ane/) // Rexes supported. Matches /lane, /cane, etc.
   public getAne(req: Request, res: Response): any {
     return res.status(OK).json({
-      message: "/ane/",
+      message: '/ane/',
     });
   }
 
-  @Get("practice/async")
+  @Get('practice/async')
   private async getWithAsync(req: Request, res: Response) {
     try {
       const asyncMsg = await this.asyncMethod(req);
@@ -122,7 +122,7 @@ export class BanksController {
 
   private asyncMethod(req: Request): Promise<string> {
     return new Promise((resolve) => {
-      resolve(req.originalUrl + " called");
+      resolve(req.originalUrl + ' called');
     });
   }
 }
