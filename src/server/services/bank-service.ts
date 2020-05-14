@@ -1,7 +1,6 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectID } from 'mongodb';
 import { IBank } from '../models/IBank';
 import MeanStackServer from '../mean-stack-server';
-const ObjectId = require('mongodb').ObjectID;
 
 export class BankService {
   collection: string = 'banks';
@@ -31,7 +30,7 @@ export class BankService {
     return (await this.client
       .db(this.db)
       .collection(this.collection)
-      .findOne({ _id: new ObjectId(id) })) as Promise<IBank>;
+      .findOne({ _id: new ObjectID(id) })) as Promise<IBank>;
   }
 
   public async create(name: string, swiftCode: string) {
@@ -47,7 +46,7 @@ export class BankService {
   }
 
   public async update(id: string, name: string, swiftCode: string) {
-    const query = { _id: new ObjectId(id) };
+    const query = { _id: new ObjectID(id) };
     const newvalues = { $set: { name, swiftCode } };
     return await this.client
       .db(this.db)
@@ -56,7 +55,7 @@ export class BankService {
   }
 
   public async delete(id: string) {
-    const query = { _id: new ObjectId(id) };
+    const query = { _id: new ObjectID(id) };
     return await this.client
       .db(this.db)
       .collection(this.collection)

@@ -1,7 +1,6 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectID } from 'mongodb';
 import { ICompany } from '../models/ICompany';
 import { ICompanyBank } from '../models/ICompanyBank';
-const ObjectId = require('mongodb').ObjectID;
 
 export class CompanyService {
   db: string = 'mean_stack';
@@ -31,7 +30,7 @@ export class CompanyService {
     return (await this.client
       .db(this.db)
       .collection(this.collection)
-      .findOne({ _id: new ObjectId(id) })) as Promise<ICompany>;
+      .findOne({ _id: new ObjectID(id) })) as Promise<ICompany>;
   }
 
   public async create(company: ICompany) {
@@ -46,7 +45,7 @@ export class CompanyService {
     id: string,
     company: ICompany
   ) {
-    const query = { _id: new ObjectId(id) };
+    const query = { _id: new ObjectID(id) };
     const newvalues = {
       $set: {
         name: company.name,
@@ -65,7 +64,7 @@ export class CompanyService {
   }
 
   public async delete(id: string) {
-    const query = { _id: new ObjectId(id) };
+    const query = { _id: new ObjectID(id) };
     return await this.client
       .db(this.db)
       .collection(this.collection)
@@ -76,7 +75,7 @@ export class CompanyService {
     id: string,
     account: ICompanyBank
   ) {
-    const query = { _id: new ObjectId(id) };
+    const query = { _id: new ObjectID(id) };
     const newCompanyBankValue = { $push: { companyBanks: account } };
 
     return await this.client
@@ -86,7 +85,7 @@ export class CompanyService {
   }
 
   public async deleteCompanyBank(id: string, bankId: string) {
-    const query = { _id: new ObjectId(id) };
+    const query = { _id: new ObjectID(id) };
     const deleteCompanyBankValue = {
       $pull: { companyBanks: { bankId } },
     };
