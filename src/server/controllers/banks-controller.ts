@@ -10,6 +10,7 @@ export class BanksController {
   bankService = new BankService();
 
   constructor(){
+    Logger.Info('bankService.connect');
     this.bankService.connect();
   }
 

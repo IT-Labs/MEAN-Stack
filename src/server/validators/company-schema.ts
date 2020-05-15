@@ -7,6 +7,5 @@ export const companySchema = joi.object().keys({
     city: joi.string().required(),
     zipcode:joi.string().required(),
     state: joi.string().required(),
-    country: joi.string().required(),
-    created: joi.string().required(),
+    country: joi.string().required()
 });
