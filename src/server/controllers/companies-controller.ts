@@ -10,7 +10,6 @@ import {
 import { Request, Response } from 'express';
 import { Logger } from '@overnightjs/logger';
 import { CompanyService } from '../services/company-service';
-import { companySchema } from '../validators/company-schema';
 
 @Controller('api/companies')
 export class CompaniesController {
@@ -54,7 +53,6 @@ export class CompaniesController {
   private async insert(req: Request, res: Response) {
     try {
       const company = req.body;
-      await companySchema.validateAsync(company);
       const obj = await this.companyService.create(company);
       Logger.Info(req.body, true);
       return res.status(OK).json({ id: obj.insertedId });
@@ -70,7 +68,6 @@ export class CompaniesController {
   private async update(req: Request, res: Response) {
     try {
       const company = req.body;
-      await companySchema.validateAsync(company);
       const ret = await this.companyService.update(req.params.id,company);
       Logger.Info(req.body, true);
       return res.status(OK).json(ret);

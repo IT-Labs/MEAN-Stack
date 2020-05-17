@@ -1,6 +1,7 @@
 import { MongoClient, ObjectID } from 'mongodb';
 import { IBank } from '../models/IBank';
 import MeanStackServer from '../mean-stack-server';
+import { bankSchema } from '../validators/bank-schema'
 
 export class BankService {
   collection: string = 'banks';
@@ -33,21 +34,21 @@ export class BankService {
       .findOne({ _id: new ObjectID(id) })) as Promise<IBank>;
   }
 
-  public async create(name: string, swiftCode: string) {
-    const bank: IBank = {
-      name,
-      swiftCode,
-      created: new Date(),
-    };
+  public async create(bank: IBank) {
+    await bankSchema.validateAsync(bank);
+
+    bank.created = new Date();
     return await this.client
       .db(this.db)
       .collection(this.collection)
       .insertOne(bank);
   }
 
-  public async update(id: string, name: string, swiftCode: string) {
+  public async update(id: string, bank: IBank) {
+    await bankSchema.validateAsync(bank);
+
     const query = { _id: new ObjectID(id) };
-    const newvalues = { $set: { name, swiftCode } };
+    const newvalues = { $set: { name: bank.name, swiftCode: bank.swiftCode } };
     return await this.client
       .db(this.db)
       .collection(this.collection)

@@ -1,6 +1,7 @@
 import { MongoClient, ObjectID } from 'mongodb';
 import { ICompany } from '../models/ICompany';
 import { ICompanyBank } from '../models/ICompanyBank';
+import { companySchema } from '../validators/company-schema';
 
 export class CompanyService {
   db: string = 'mean_stack';
@@ -34,7 +35,9 @@ export class CompanyService {
   }
 
   public async create(company: ICompany) {
+    await companySchema.validateAsync(company);
 
+    company.created = new Date();
     return await this.client
       .db(this.db)
       .collection(this.collection)
@@ -45,6 +48,8 @@ export class CompanyService {
     id: string,
     company: ICompany
   ) {
+    await companySchema.validateAsync(company);
+
     const query = { _id: new ObjectID(id) };
     const newvalues = {
       $set: {

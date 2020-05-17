@@ -3,7 +3,6 @@ import { Controller, Get, Post, Put, Delete } from '@overnightjs/core';
 import { Request, Response } from 'express';
 import { Logger } from '@overnightjs/logger';
 import { BankService } from '../services/bank-service';
-import { bankSchema } from '../validators/bank-schema'
 
 @Controller('api/banks')
 export class BanksController {
@@ -47,12 +46,7 @@ export class BanksController {
   private async insert(req: Request, res: Response) {
     try {
       const bank = req.body;
-      await bankSchema.validateAsync(bank);
-      const obj = await this.bankService.create(
-        req.body.name,
-        req.body.swiftCode
-      );
-
+      const obj = await this.bankService.create(bank);
       Logger.Info(req.body, true);
       return res.status(OK).json({ id: obj.insertedId });
     } catch (err) {
@@ -67,13 +61,7 @@ export class BanksController {
   private async update(req: Request, res: Response) {
     try {
       const bank = req.body;
-      await bankSchema.validateAsync(bank);
-      const ret = await this.bankService.update(
-        req.params.id,
-        req.body.name,
-        req.body.swiftCode
-      );
-
+      const ret = await this.bankService.update(req.params.id,bank);
       Logger.Info('Body: ' + req.body, true);
       return res.status(OK).json(ret);
     } catch (err) {
