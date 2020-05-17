@@ -1,12 +1,13 @@
-import { MongoClient } from "mongodb";
-import { IBank } from "../models/IBank";
-const ObjectId = require("mongodb").ObjectID;
+import { MongoClient, ObjectID } from 'mongodb';
+import { IBank } from '../models/IBank';
+import MeanStackServer from '../mean-stack-server';
+import { bankSchema } from '../validators/bank-schema'
 
 export class BankService {
-  db: string = "mean_stack";
-  collection: string = "banks";
+  collection: string = 'banks';
+  db: string = 'mean_stack';
   uri: string =
-    "mongodb+srv://testuser:o98wHwKDlGeW7QaK@testcluster-qhjws.mongodb.net/test?retryWrites=true&w=majority";
+    'mongodb+srv://testuser:o98wHwKDlGeW7QaK@testcluster-qhjws.mongodb.net/test?retryWrites=true&w=majority';
 
   client: MongoClient;
 
@@ -30,24 +31,24 @@ export class BankService {
     return (await this.client
       .db(this.db)
       .collection(this.collection)
-      .findOne({ _id: new ObjectId(id) })) as Promise<IBank>;
+      .findOne({ _id: new ObjectID(id) })) as Promise<IBank>;
   }
 
-  public async create(name: string, swiftCode: string) {
-    const bank: IBank = {
-      name: name,
-      swiftCode: swiftCode,
-      created: new Date(),
-    };
+  public async create(bank: IBank) {
+    await bankSchema.validateAsync(bank);
+
+    bank.created = new Date();
     return await this.client
       .db(this.db)
       .collection(this.collection)
       .insertOne(bank);
   }
 
-  public async update(id: string, name: string, swiftCode: string) {
-    var query = { _id: new ObjectId(id) };
-    var newvalues = { $set: { name: name, swiftCode: swiftCode } };
+  public async update(id: string, bank: IBank) {
+    await bankSchema.validateAsync(bank);
+
+    const query = { _id: new ObjectID(id) };
+    const newvalues = { $set: { name: bank.name, swiftCode: bank.swiftCode } };
     return await this.client
       .db(this.db)
       .collection(this.collection)
@@ -55,7 +56,7 @@ export class BankService {
   }
 
   public async delete(id: string) {
-    var query = { _id: new ObjectId(id) };
+    const query = { _id: new ObjectID(id) };
     return await this.client
       .db(this.db)
       .collection(this.collection)
