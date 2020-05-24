@@ -8,11 +8,6 @@ import { BankService } from '../services/bank-service';
 export class BanksController {
   bankService = new BankService();
 
-  constructor(){
-    Logger.Info('bankService.connect');
-    this.bankService.connect();
-  }
-
   @Get(':id')
   private async get(req: Request, res: Response) {
     try {

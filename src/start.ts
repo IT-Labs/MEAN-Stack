@@ -1,5 +1,5 @@
-import MeanStackServer from './server/mean-stack-server'
+import MeanStackServer from './server/mean-stack-server';
 
-let server = new MeanStackServer();
+const server = new MeanStackServer();
 server.start(3001);
 // comment

@@ -3,12 +3,14 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { Server } from '@overnightjs/core';
 import { Logger } from '@overnightjs/logger';
-import { MongoClient } from 'mongodb';
+import { MongoClient, Db} from 'mongodb';
 import TestController from './controllers/test-controller';
 import BanksController from './controllers/banks-controller';
 import CompaniesController from './controllers/companies-controller';
+import { runInThisContext } from 'vm';
 
 class MeanStackServer extends Server {
+  mongo = require('./services/client-service');
   private readonly SERVER_START_MSG = 'Server started on port: ';
   private readonly DEV_MSG =
     'Express Server is running in development mode. ' +
@@ -19,18 +21,10 @@ class MeanStackServer extends Server {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
 
-    const banksController = new BanksController();
-    const companiesController = new CompaniesController();
-    const testController = new TestController();
-
-    super.addControllers([
-      banksController,
-      companiesController,
-      testController,
-    ]);
+    this.initAppConfig();
 
     // Point to front-end code
-    this.serveFrontEndProd();
+    // this.serveFrontEndProd();
 
     // if (process.env.NODE_ENV !== "production") {
     //   console.log("Starting server in development mode");
@@ -41,7 +35,22 @@ class MeanStackServer extends Server {
     // }
   }
 
-  public start(port: number): void {
+  public async initAppConfig(){
+    await this.mongo.connectToMongoServer();
+
+    const banksController = new BanksController();
+    const companiesController = new CompaniesController();
+    const testController = new TestController();
+
+     super.addControllers([
+      banksController,
+      companiesController,
+      testController,
+    ]);
+
+  }
+
+  public async start(port: number) {
     this.app.listen(port, () => {
       Logger.Imp(this.SERVER_START_MSG + port);
     });

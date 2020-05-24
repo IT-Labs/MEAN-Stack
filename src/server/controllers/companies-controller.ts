@@ -15,11 +15,6 @@ import { CompanyService } from '../services/company-service';
 export class CompaniesController {
   companyService = new CompanyService();
 
-  constructor() {
-    Logger.Info('CompaniesController Constructor Called');
-    this.companyService.connect();
-  }
-
   @Get(':id')
   private async get(req: Request, res: Response) {
     try {

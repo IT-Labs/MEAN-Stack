@@ -2,34 +2,22 @@ import { MongoClient, ObjectID } from 'mongodb';
 import { ICompany } from '../models/ICompany';
 import { ICompanyBank } from '../models/ICompanyBank';
 import { companySchema } from '../validators/company-schema';
+import { getDb } from './client-service'
 
 export class CompanyService {
-  db: string = 'mean_stack';
+
+  db = getDb();
   collection: string = 'companies';
-  uri: string =
-    'mongodb+srv://testuser:o98wHwKDlGeW7QaK@testcluster-qhjws.mongodb.net/test?retryWrites=true&w=majority';
-
-  client: MongoClient;
-
-  constructor() {
-    this.client = new MongoClient(this.uri, { useUnifiedTopology: true });
-  }
-
-  public async connect() {
-    await this.client.connect();
-  }
 
   public async getAll() {
-    return await this.client
-      .db(this.db)
+    return await this.db
       .collection(this.collection)
       .find({})
       .toArray();
   }
 
   public async getById(id: string): Promise<ICompany> {
-    return (await this.client
-      .db(this.db)
+    return (await this.db
       .collection(this.collection)
       .findOne({ _id: new ObjectID(id) })) as Promise<ICompany>;
   }
@@ -38,8 +26,7 @@ export class CompanyService {
     await companySchema.validateAsync(company);
 
     company.created = new Date();
-    return await this.client
-      .db(this.db)
+    return await this.db
       .collection(this.collection)
       .insertOne(company);
   }
@@ -62,16 +49,14 @@ export class CompanyService {
         country: company.country
       },
     };
-    return await this.client
-      .db(this.db)
+    return await this.db
       .collection(this.collection)
       .updateOne(query, newvalues);
   }
 
   public async delete(id: string) {
     const query = { _id: new ObjectID(id) };
-    return await this.client
-      .db(this.db)
+    return await this.db
       .collection(this.collection)
       .deleteOne(query);
   }
@@ -83,8 +68,7 @@ export class CompanyService {
     const query = { _id: new ObjectID(id) };
     const newCompanyBankValue = { $push: { companyBanks: account } };
 
-    return await this.client
-      .db(this.db)
+    return await this.db
       .collection(this.collection)
       .findOneAndUpdate(query, newCompanyBankValue);
   }
@@ -95,8 +79,7 @@ export class CompanyService {
       $pull: { companyBanks: { bankId } },
     };
 
-    return await this.client
-      .db(this.db)
+    return await this.db
       .collection(this.collection)
       .findOneAndUpdate(query, deleteCompanyBankValue);
   }
