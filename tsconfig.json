@@ -20,7 +20,7 @@
       ]
     },
     "include": [
-      "./src/**/*.ts"
+      "./src/**/*.ts", "src/server/tests/bank-integration.test.js"
     ],
     "exclude": [
       "./src/**/*.test.ts",

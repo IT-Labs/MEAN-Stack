@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha './src/**/*.test.js'",
     "start-dev": "nodemon"
   },
   "keywords": [],
@@ -31,11 +31,16 @@
     "@overnightjs/core": "^1.6.15",
     "@overnightjs/logger": "^1.1.10",
     "@types/hapi__joi": "^17.1.0",
+    "chai": "^4.2.0",
     "express": "^4.17.1",
+    "faker": "^4.1.0",
     "http-status-codes": "^1.4.0",
     "i": "^0.3.6",
     "joi": "^14.3.1",
+    "mocha": "^7.2.0",
     "mongodb": "^3.5.7",
-    "npm": "^6.14.4"
+    "npm": "^6.14.4",
+    "request": "^2.88.2",
+    "sinon": "^9.0.2"
   }
 }

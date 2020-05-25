@@ -43,7 +43,7 @@ export class BanksController {
   }
 
   @Post()
-  private async insert(req: Request, res: Response) {
+  public async insert(req: Request, res: Response) {
     try {
       const bank = req.body;
       const obj = await this.bankService.create(bank);
