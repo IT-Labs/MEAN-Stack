@@ -9,8 +9,8 @@ import BanksController from './controllers/banks-controller';
 import CompaniesController from './controllers/companies-controller';
 
 class MeanStackServer extends Server {
-  private readonly SERVER_START_MSG = 'Server started on port: ';
-  private readonly DEV_MSG =
+   SERVER_START_MSG = 'Server started on port: ';
+   DEV_MSG =
     'Express Server is running in development mode. ' +
     'No front-end content is being served.';
 
