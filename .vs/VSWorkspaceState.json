@@ -5,8 +5,9 @@
     "\\src\\server",
     "\\src\\server\\controllers",
     "\\src\\server\\models",
-    "\\src\\server\\services"
+    "\\src\\server\\services",
+    "\\src\\server\\validators"
   ],
-  "SelectedNode": "\\src\\server\\services\\company-service.ts",
+  "SelectedNode": "\\src\\server\\controllers\\banks-controller.ts",
   "PreviewInSolutionExplorer": false
 }

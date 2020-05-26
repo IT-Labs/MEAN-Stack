@@ -20,6 +20,7 @@ export class BankService {
   }
 
   public async getAll() {
+    await this.client.connect();
     return await this.client
       .db(this.db)
       .collection(this.collection)
@@ -28,6 +29,8 @@ export class BankService {
   }
 
   public async getById(id: string): Promise<IBank> {
+    await this.client.connect();
+    
     return (await this.client
       .db(this.db)
       .collection(this.collection)

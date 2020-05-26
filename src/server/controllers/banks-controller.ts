@@ -16,7 +16,11 @@ export class BanksController {
   @Get(':id')
   private async get(req: Request, res: Response) {
     try {
-      const bank = await this.bankService.getById(req.params.id);
+      let bankService1 = new BankService();
+
+      //YYY
+
+      const bank = await bankService1.getById(req.params.id);
       Logger.Info('Get: ' + req.params.id);
       return res.status(OK).json(bank);
     } catch (err) {
@@ -30,7 +34,9 @@ export class BanksController {
   @Get('')
   private async getAll(req: Request, res: Response) {
     try {
-      const banks = await this.bankService.getAll();
+      let bankService1 = new BankService();
+
+      const banks = await bankService1.getAll();
 
       Logger.Info(req.query, true);
       return res.status(OK).json(banks);
