@@ -8,7 +8,8 @@ export async function connectToMongoServer() {
     const config = { useUnifiedTopology: true, useNewUrlParser: true };
     client = new MongoClient(uri, config );
     await client.connect();
-    db = client.db(process.env.db);
+    //db = client.db(process.env.db);
+    db = client.db("mean_stack")
 }
 
 export function getDb(): Db {
