@@ -32,3 +32,7 @@ export async function connectToMongoServer() {
 export function getDb(): Db {
   return db;
 }
+
+export function getEnvUrl(){
+  return process.env.URL;
+}

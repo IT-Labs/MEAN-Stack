@@ -16,7 +16,6 @@ class MeanStackServer extends Server {
     'Express Server is running in development mode. ' +
     'No front-end content is being served.';
 
-  public theApp: express.Application = this.app;
 
   constructor() {
     super(true);
@@ -51,11 +50,12 @@ class MeanStackServer extends Server {
     ]);
   }
 
-  public async start(port: number) {
-    this.app.listen(port, () => {
-      Logger.Imp(this.SERVER_START_MSG + port);
+  public start() {
+    this.app.listen(process.env.PORT, () => {
+      Logger.Imp(this.SERVER_START_MSG + process.env.PORT);
     });
   }
+
 
   private serveFrontEndProd(): void {
     const dir = path.join(
