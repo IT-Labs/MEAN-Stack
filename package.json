@@ -6,8 +6,8 @@
   "scripts": {
     "test-init": "nodemon --exec \"ts-node -r dotenv/config ./src/start.ts dotenv_config_path=./resources/.test.env\" ",
     "test-start": "mocha -r ts-node/register -r dotenv/config src/server/tests/**/*.spec.ts dotenv_config_path=./resources/.test.env\" ",
-    "test": "npm run test-init & npm run test-start",
-    "start-dev": "nodemon"
+    "test": "npm run test-init && npm run test-start",
+    "start-dev": "nodemon --exec \"ts-node -r dotenv/config ./src/start.ts dotenv_config_path=./resources/.dev.env\""
   },
   "keywords": [],
   "author": "",
