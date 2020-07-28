@@ -1,33 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { CompanyService } from 'src/app/services/company.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BankService } from 'src/app/services/bank.service';
 
 @Component({
-  selector: 'app-companies',
-  templateUrl: './companies.component.html',
-  styleUrls: ['./companies.component.css'],
+  selector: 'app-banks',
+  templateUrl: './banks.component.html',
+  styleUrls: ['./banks.component.css']
 })
-export class CompaniesComponent implements OnInit {
-  companies: any = [];
+export class BanksComponent implements OnInit {
+
+  banks: any = [];
   items: any = [];
   total: number = 0;
   loading: boolean = false;
   keyword: string = '';
   searchTerm: string = '';
 
-  constructor(private companyService: CompanyService) {}
+  constructor(private bankService: BankService) {}
 
   ngOnInit() {
-    this.getCompanies()
+    this.getBanks()
   }
 
-  getCompanies() {
+  getBanks() {
     this.loading = true;
 
-    this.companyService.getAll().subscribe(
+    this.bankService.getAll().subscribe(
       (res: any) => {
-        this.companies = res;
-        this.total = this.companies.length;
+        this.banks = res;
+        this.total = this.banks.length;
         this.loading = false;
         this.search();
       },
@@ -37,17 +38,17 @@ export class CompaniesComponent implements OnInit {
     );
   }
 
-  addCompany() {
+  addBank() {
     //this.getCompanies();
   }
 
-  editCompany(id) {}
+  editBank(id) {}
 
-  deleteCompany(id) {}
+  deleteBank(id) {}
 
   search(): void {
     let term = this.searchTerm;
-    this.items = this.companies.filter((tag) => {
+    this.items = this.banks.filter((tag) => {
       if (tag.name) 
         return tag.name.indexOf(term) >= 0;
       else 
