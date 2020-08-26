@@ -22,8 +22,8 @@ export class BankService {
     return this.http.post(this.endpoint, model);
   }
 
-  update(model) {
-    return this.http.put(`${this.endpoint}/${model.id}`, model);
+  update(id, model) {
+    return this.http.put(`${this.endpoint}/${id}`, model);
   }
 
   delete(id: string) {

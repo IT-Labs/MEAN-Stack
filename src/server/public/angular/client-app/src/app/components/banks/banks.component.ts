@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BankService } from 'src/app/services/bank.service';
+import { Router } from '@angular/router';
+import { BankModel } from 'src/app/models/bank-model';
 
 @Component({
   selector: 'app-banks',
@@ -9,14 +11,14 @@ import { BankService } from 'src/app/services/bank.service';
 })
 export class BanksComponent implements OnInit {
 
-  banks: any = [];
+  banks: BankModel[] = [];
   items: any = [];
   total: number = 0;
   loading: boolean = false;
   keyword: string = '';
   searchTerm: string = '';
 
-  constructor(private bankService: BankService) {}
+  constructor(private bankService: BankService, private router: Router) {}
 
   ngOnInit() {
     this.getBanks()
@@ -26,7 +28,7 @@ export class BanksComponent implements OnInit {
     this.loading = true;
 
     this.bankService.getAll().subscribe(
-      (res: any) => {
+      (res: BankModel[]) => {
         this.banks = res;
         this.total = this.banks.length;
         this.loading = false;
@@ -39,12 +41,31 @@ export class BanksComponent implements OnInit {
   }
 
   addBank() {
-    //this.getCompanies();
+    this.router.navigate(['/banks/new']);
   }
 
-  editBank(id) {}
+  editBank(id) {
+    this.router.navigate(['/banks', id]);
+  }
 
-  deleteBank(id) {}
+  deleteBank(id) {
+    console.log("Delete bank");
+    let bank = this.banks.find(item => item._id === id);
+
+    if(confirm("Are you sure to delete bank " + bank.name + " ?")) {
+      this.bankService.delete(id)
+          .subscribe((data: BankModel) => {
+            let list = this.banks.filter(item => item._id !== id);
+            this.banks = list;
+            this.total = this.banks.length;
+            this.loading = false;
+            this.search();
+          },
+          (err: HttpErrorResponse) => {
+            this.loading = false;
+          });
+      }
+  }
 
   search(): void {
     let term = this.searchTerm;
