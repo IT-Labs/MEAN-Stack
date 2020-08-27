@@ -6,7 +6,7 @@ export interface ICompany {
   taxNumber?: string;
   address?: string;
   city?: string;
-  zipcode?: string;
+  zipCode?: string;
   state?: string;
   country?: string;
   created?: Date;

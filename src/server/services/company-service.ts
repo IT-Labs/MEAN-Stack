@@ -57,7 +57,7 @@ export class CompanyService {
         taxNumber: company.taxNumber,
         address: company.address,
         city: company.city,
-        zipcode: company.zipcode,
+        zipCode: company.zipCode,
         state: company.state,
         country: company.country
       },
