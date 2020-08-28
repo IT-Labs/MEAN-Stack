@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BankService {
-  apiEndpoint = 'http://localhost:3001/api';
+  apiEndpoint: string = environment.apiEndpoint;
   endpoint: string = `${this.apiEndpoint}/banks`;
 
   constructor(private http: HttpClient) {}
-
+  
   getAll() {
     return this.http.get(this.endpoint);
   }
