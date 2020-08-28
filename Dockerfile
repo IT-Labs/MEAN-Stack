@@ -37,7 +37,7 @@ RUN npm run build
 
 # -------------------------------------------
 # Stage 2 build for creating smaller image
-FROM node:carbon-alpine
+FROM node:12.7-alpine
 WORKDIR /usr/src/app
 
 # copy NODE APP
