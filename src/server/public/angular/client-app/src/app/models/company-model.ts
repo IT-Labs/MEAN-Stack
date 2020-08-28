@@ -1,3 +1,5 @@
+import { AccountModel } from './account-model';
+
 export class CompanyModel {
     _id: string;
     name: string;
@@ -7,4 +9,5 @@ export class CompanyModel {
     zipCode: number;
     state: number;
     country: number;
+    companyBanks?: AccountModel[];
   }

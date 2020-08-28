@@ -18,6 +18,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { CompanyAccountsComponent } from './components/company-accounts/company-accounts.component';
 //import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 @NgModule({
@@ -32,7 +33,8 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    MainComponent
+    MainComponent,
+    CompanyAccountsComponent
   ],
   imports: [
     BrowserModule,

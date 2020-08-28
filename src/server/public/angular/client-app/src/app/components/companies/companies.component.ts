@@ -47,6 +47,10 @@ export class CompaniesComponent implements OnInit {
     this.router.navigate(['/companies', id]);
   }
 
+  companyAccounts(id) {
+    this.router.navigate(['/company/' + id + '/accounts']);
+  }
+
   deleteCompany(id) {
     console.log('Delete company');
     let company = this.companies.find((item) => item._id === id);

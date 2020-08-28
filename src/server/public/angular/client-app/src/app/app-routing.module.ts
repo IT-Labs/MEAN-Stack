@@ -6,18 +6,18 @@ import { LoginComponent } from './components/login/login.component';
 import { SecureLayoutComponent } from './layouts/secure-layout/secure-layout.component';
 import { BankComponent } from './components/bank/bank.component';
 import { BanksComponent } from './components/banks/banks.component';
-
+import { CompanyAccountsComponent } from './components/company-accounts/company-accounts.component';
 
 export const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    component: LoginComponent,
+    component: LoginComponent
   },
   {
     path: "login",
     component: LoginComponent,
-    data: { title: "Login" },
+    data: { title: "Login" }
   },
   {
     path: "",
@@ -27,50 +27,55 @@ export const routes: Routes = [
         path: "companies",
         component: CompaniesComponent,
         data: {
-          title: "Companies",
-        },
+          title: "Companies"
+        }
       },
       {
         path: "companies/:id",
         component: CompanyComponent,
         data: {
-          title: "Company",
-        },
+          title: "Company"
+        }
       },
       {
         path: "companies/new",
         component: CompanyComponent,
         data: {
-          title: "Company",
-        },
+          title: "Company"
+        }
       },
       {
         path: "banks",
         component: BanksComponent,
         data: {
-          title: "Banks",
-        },
+          title: "Banks"
+        }
       },
       {
         path: "banks/:id",
         component: BankComponent,
         data: {
-          title: "Bank",
-        },
+          title: "Bank"
+        }
       },
       {
         path: "banks/new",
         component: BankComponent,
         data: {
-          title: "Bank",
-        },
+          title: "Bank"
+        }
+      },
+      {
+        path: "company/:id/accounts",
+        component: CompanyAccountsComponent,
+        data: {
+          title: "Company"
+        }
       }
     ]
   }
   
 ];
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
