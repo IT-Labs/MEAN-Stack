@@ -44,6 +44,9 @@ Kole Vasilevski
 * 0.1
     * Initial Release
 
+## Run in docker
+docker build -t meanstackapp:1.0 .
+docker run -p 3001:3001 meanstackapp:1.0
 
 ## Acknowledgments
 
