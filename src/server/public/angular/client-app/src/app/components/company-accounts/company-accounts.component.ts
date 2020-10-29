@@ -16,7 +16,6 @@ import { BankModel } from 'src/app/models/bank-model';
 @Component({
   selector: 'app-company-accounts',
   templateUrl: './company-accounts.component.html',
-  styleUrls: ['./company-accounts.component.scss'],
 })
 export class CompanyAccountsComponent implements OnInit {
   companyId: string;

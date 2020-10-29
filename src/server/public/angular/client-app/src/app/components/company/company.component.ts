@@ -8,7 +8,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
-  styleUrls: ['./company.component.css'],
 })
 export class CompanyComponent implements OnInit {
   form: FormGroup;

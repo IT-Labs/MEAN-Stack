@@ -7,7 +7,6 @@ import { BankModel } from 'src/app/models/bank-model';
 @Component({
   selector: 'app-banks',
   templateUrl: './banks.component.html',
-  styleUrls: ['./banks.component.css'],
 })
 export class BanksComponent implements OnInit {
   banks: BankModel[] = [];

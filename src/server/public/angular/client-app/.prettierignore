@@ -1,0 +1,15 @@
+dist
+dll
+*.json
+coverage
+bin
+build
+.cache
+public
+ui/WebContent-dev/landing-pages/.cache
+ui/WebContent-dev/landing-pages/public
+src/main/resources/ui
+ui/WebContent-customers
+*.min.js
+newrelic.js
+vendor
