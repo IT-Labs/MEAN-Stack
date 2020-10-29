@@ -7,10 +7,9 @@ import { BankModel } from 'src/app/models/bank-model';
 @Component({
   selector: 'app-banks',
   templateUrl: './banks.component.html',
-  styleUrls: ['./banks.component.css']
+  styleUrls: ['./banks.component.css'],
 })
 export class BanksComponent implements OnInit {
-
   banks: BankModel[] = [];
   items: any = [];
   total: number = 0;
@@ -21,7 +20,7 @@ export class BanksComponent implements OnInit {
   constructor(private bankService: BankService, private router: Router) {}
 
   ngOnInit() {
-    this.getBanks()
+    this.getBanks();
   }
 
   getBanks() {
@@ -49,31 +48,30 @@ export class BanksComponent implements OnInit {
   }
 
   deleteBank(id) {
-    console.log("Delete bank");
-    let bank = this.banks.find(item => item._id === id);
+    console.log('Delete bank');
+    let bank = this.banks.find((item) => item._id === id);
 
-    if(confirm("Are you sure to delete bank " + bank.name + " ?")) {
-      this.bankService.delete(id)
-          .subscribe((data: BankModel) => {
-            let list = this.banks.filter(item => item._id !== id);
-            this.banks = list;
-            this.total = this.banks.length;
-            this.loading = false;
-            this.search();
-          },
-          (err: HttpErrorResponse) => {
-            this.loading = false;
-          });
-      }
+    if (confirm('Are you sure to delete bank ' + bank.name + ' ?')) {
+      this.bankService.delete(id).subscribe(
+        (data: BankModel) => {
+          let list = this.banks.filter((item) => item._id !== id);
+          this.banks = list;
+          this.total = this.banks.length;
+          this.loading = false;
+          this.search();
+        },
+        (err: HttpErrorResponse) => {
+          this.loading = false;
+        }
+      );
+    }
   }
 
   search(): void {
     let term = this.searchTerm;
     this.items = this.banks.filter((tag) => {
-      if (tag.name) 
-        return tag.name.indexOf(term) >= 0;
-      else 
-        return false;
+      if (tag.name) return tag.name.indexOf(term) >= 0;
+      else return false;
     });
     this.total = this.items.length;
   }

@@ -10,75 +10,74 @@ import { CompanyAccountsComponent } from './components/company-accounts/company-
 
 export const routes: Routes = [
   {
-    path: "",
-    pathMatch: "full",
-    component: LoginComponent
-  },
-  {
-    path: "login",
+    path: '',
+    pathMatch: 'full',
     component: LoginComponent,
-    data: { title: "Login" }
   },
   {
-    path: "",
+    path: 'login',
+    component: LoginComponent,
+    data: { title: 'Login' },
+  },
+  {
+    path: '',
     component: SecureLayoutComponent,
     children: [
       {
-        path: "companies",
+        path: 'companies',
         component: CompaniesComponent,
         data: {
-          title: "Companies"
-        }
+          title: 'Companies',
+        },
       },
       {
-        path: "companies/:id",
+        path: 'companies/:id',
         component: CompanyComponent,
         data: {
-          title: "Company"
-        }
+          title: 'Company',
+        },
       },
       {
-        path: "companies/new",
+        path: 'companies/new',
         component: CompanyComponent,
         data: {
-          title: "Company"
-        }
+          title: 'Company',
+        },
       },
       {
-        path: "banks",
+        path: 'banks',
         component: BanksComponent,
         data: {
-          title: "Banks"
-        }
+          title: 'Banks',
+        },
       },
       {
-        path: "banks/:id",
+        path: 'banks/:id',
         component: BankComponent,
         data: {
-          title: "Bank"
-        }
+          title: 'Bank',
+        },
       },
       {
-        path: "banks/new",
+        path: 'banks/new',
         component: BankComponent,
         data: {
-          title: "Bank"
-        }
+          title: 'Bank',
+        },
       },
       {
-        path: "company/:id/accounts",
+        path: 'company/:id/accounts',
         component: CompanyAccountsComponent,
         data: {
-          title: "Company"
-        }
-      }
-    ]
-  }
-  
+          title: 'Company',
+        },
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

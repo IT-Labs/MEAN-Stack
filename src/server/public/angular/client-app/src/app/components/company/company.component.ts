@@ -37,14 +37,13 @@ export class CompanyComponent implements OnInit {
       city: ['', [Validators.required]],
       zipCode: ['', [Validators.required]],
       state: ['', [Validators.required]],
-      country: ['', [Validators.required]]
+      country: ['', [Validators.required]],
     });
 
     this.actionType = this.companyId.toLowerCase() === 'new' ? 'Add' : 'Edit';
   }
 
   ngOnInit() {
-    
     if (this.actionType === 'Edit') {
       this.companyService.getById(this.companyId.toString()).subscribe(
         (data: CompanyModel) => {

@@ -34,7 +34,7 @@ import { CompanyAccountsComponent } from './components/company-accounts/company-
     HeaderComponent,
     FooterComponent,
     MainComponent,
-    CompanyAccountsComponent
+    CompanyAccountsComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,9 +42,9 @@ import { CompanyAccountsComponent } from './components/company-accounts/company-
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

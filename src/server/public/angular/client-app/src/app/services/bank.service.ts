@@ -10,7 +10,7 @@ export class BankService {
   endpoint: string = `${this.apiEndpoint}/banks`;
 
   constructor(private http: HttpClient) {}
-  
+
   getAll() {
     return this.http.get(this.endpoint);
   }

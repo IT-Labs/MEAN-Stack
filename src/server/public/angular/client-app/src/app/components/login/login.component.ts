@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 //import {ApiService} from "../service/api.service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
   invalidLogin: boolean = false;
   constructor(
-    private formBuilder: FormBuilder, 
-    private router: Router, 
-    //private apiService: ApiService
-    ) { }
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) //private apiService: ApiService
+  {}
 
   onSubmit() {
     if (this.loginForm.invalid) {
@@ -24,8 +23,8 @@ export class LoginComponent implements OnInit {
     }
     const loginPayload = {
       username: this.loginForm.controls.username.value,
-      password: this.loginForm.controls.password.value
-    }
+      password: this.loginForm.controls.password.value,
+    };
     // this.apiService.login(loginPayload).subscribe(data => {
     //   debugger;
     //   if(data.status === 200) {
@@ -36,7 +35,10 @@ export class LoginComponent implements OnInit {
     //     alert(data.message);
     //   }
     // });
-    window.localStorage.setItem('token', "data.result.token-23842783wjkefkwefkf");
+    window.localStorage.setItem(
+      'token',
+      'data.result.token-23842783wjkefkwefkf'
+    );
     this.router.navigate(['companies']);
   }
 
@@ -44,8 +46,7 @@ export class LoginComponent implements OnInit {
     window.localStorage.removeItem('token');
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
-
 }

@@ -11,9 +11,8 @@ describe('SecureLayoutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SecureLayoutComponent ]
-    })
-    .compileComponents();
+      declarations: [SecureLayoutComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
