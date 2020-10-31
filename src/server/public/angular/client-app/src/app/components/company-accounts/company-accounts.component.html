@@ -56,21 +56,12 @@
                   {{ bank.name }}
                 </option>
               </select>
-              <div
-                *ngIf="f.bankId.touched && f.bankId.invalid"
-                class="alert alert-danger"
-              >
+              <div *ngIf="f.bankId.touched && f.bankId.invalid" class="alert alert-danger">
                 <div *ngIf="f.bankId.errors.required">Name is required.</div>
               </div>
             </div>
             <div class="form-group col-md-2">
-              <button
-                class="btn btn-primary"
-                type="submit"
-                [disabled]="!form.valid"
-              >
-                Add
-              </button>
+              <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Add</button>
             </div>
           </div>
         </div>
@@ -96,10 +87,7 @@
             <td>{{ account.bankName }}</td>
             <td>{{ account.currency }}</td>
             <td>
-              <button
-                class="btn btn-danger btn-sm ml-2"
-                (click)="deleteAccount(account)"
-              >
+              <button class="btn btn-danger btn-sm ml-2" (click)="deleteAccount(account)">
                 Delete
               </button>
             </td>

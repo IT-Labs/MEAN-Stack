@@ -12,9 +12,8 @@ export class LoginComponent implements OnInit {
   invalidLogin: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
-  ) //private apiService: ApiService
-  {}
+    private router: Router //private apiService: ApiService
+  ) {}
 
   onSubmit() {
     if (this.loginForm.invalid) {
@@ -34,10 +33,7 @@ export class LoginComponent implements OnInit {
     //     alert(data.message);
     //   }
     // });
-    window.localStorage.setItem(
-      'token',
-      'data.result.token-23842783wjkefkwefkf'
-    );
+    window.localStorage.setItem('token', 'data.result.token-23842783wjkefkwefkf');
     this.router.navigate(['companies']);
   }
 

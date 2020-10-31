@@ -1,17 +1,16 @@
-@import '../variables';
-@import './_global-mixins';
-@import '~bootstrap-sass/assets/stylesheets/_bootstrap';
+@import './variables';
 
 body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
-  background: #e1e1e6;
-  @media screen and (max-width: $screen-xs-max) {
+  background: #fff;
+  margin: 0;
+  @media screen and (max-width: $screen-xs) {
     padding-bottom: 50px;
   }
 }
 
-html{
+html {
   overflow-x: hidden;
 }
 
@@ -32,275 +31,43 @@ th {
   min-height: 100vh;
 }
 
-.content-holder {
-  @include center-block();
-  max-width: $app-page-portal-content-holder-max-width;
-  padding: 0 $app-page-portal-content-holder-padding-h;
-
-  @media screen and (max-width: $screen-lg) {
-    padding: 0px;
-  }
-
-  @media screen and (min-width: $screen-xs-max) and (max-width: $screen-lg) {
-    padding: 0 20px;
-  }
-
-  @media screen and (max-width: $screen-md) {
-    display: block;
-  }
-
-  .holder {
-    background: $app-global-color-white;
-    position: relative;
-
-    .user-info {
-      position: relative;
-      padding: 0 37px 0 0;
-
-      @media screen and (max-width: $screen-xs) {
-        padding: 20px;
-        text-align: center;
-      }
-
-      .img-holder {
-        float: left;
-        margin: 0 24px 0 0;
-
-        @media screen and (max-width: $screen-xs) {
-          @include center-block();
-          float: none;
-          margin-bottom: 10px;
-        }
-      }
-
-      .description {
-        overflow: hidden;
-        padding-top: 23px;
-
-        @media screen and (max-width: $screen-lg) {
-          padding-top: 8px;
-        }
-      }
-
-      h2 {
-        font-size: 22px;
-        line-height: 25px;
-        margin: 0 0 5px;
-      }
-    }
-  }
-}
-
-.table-holder {
-  display: flex;
-  width: 100%;
-  align-items: flex-start;
-
-  @media screen and (max-width: $screen-sm-max) {
-    display: block;
-  }
-
-  @mixin cell($offset-width) {
-    vertical-align: top;
-    position: relative;
-    word-break: break-word;
-    max-width: 100%;
-    flex: 1 1 auto;
-    flex-basis: calc(100% - #{$offset-width});
-
-    @media screen and (max-width: $screen-md) {
-      display: block;
-      width: 100%;
-      max-width: 610px;
-      margin: 0 auto;
-    }
-  }
-
-  @mixin side-cell($cell-width, $cell-padding) {
-    padding: $app-page-portal-widget-padding 0 0;
-    @media screen and (max-width: $screen-md) {
-      padding: 0px;
-      max-width: 610px;
-      margin: 0 auto;
-    }
-    word-break: break-word;
-
-    @media screen and (min-width: $screen-md-min) {
-      $width: $cell-width;
-      vertical-align: top;
-      flex: 1 0;
-      flex-basis: auto;
-      position: relative;
-      padding: $cell-padding;
-      max-width: $width;
-      width: 100%;
-    }
-  }
-
-  .left-cell {
-    @include cell(332px);
-  }
-
-  .right-cell, .right-column {
-    @include side-cell(350px, 0 0 0 $app-page-portal-widget-padding);
-    $width: 332px;
-    #{$app-prefix}-tiles #{$app-prefix}-block, #{$app-prefix}-group-members {
-      width: $width;
-    }
-  }
-
-  .left-column {
-    @include side-cell(300px, 0 $app-page-portal-widget-padding 0 0);
-    @media screen and (max-width: $screen-md-max) {
-      @include side-cell(230px, 0 $app-page-portal-widget-padding 0 0);
-    }
-  }
-
-  .center-column {
-    @include cell(562px);
-  }
-
-
-}
-
-.content {
-  padding: $app-page-portal-search-bar-height 0 30px;
-  background-size: cover;
-  position: relative;
-  min-height: 100vh;
-  overflow-x: hidden;
-
-  @media screen and (max-width: $screen-xs-max) {
-    padding: $app-page-portal-search-bar-height 0 30px;
-  }
-
-  &:before {
-    content: '';
-    display: block;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    height: 313px;
-    left: 0;
-    background-size: cover;
-    background-position: center 0;
-    background-repeat: repeat-x;
-  }
-}
-
-.promo-holder {
-  margin: 0 auto;
-  max-width: $app-page-portal-content-holder-max-width;
-  padding: 20px 0 15px 20px;
-  position: relative;
-  color: $app-global-color-white;
-  font-weight: 300;
-
-  @media screen and (max-width: $screen-xs-max) {
-    padding: 20px 0 10px 20px;
-  }
-
-  @media screen and (min-width: $screen-lg) {
-    padding-left: $app-page-portal-content-holder-padding-h;
-  }
-
-  h1 {
-    font-size: 25px;
-    line-height: 35px;
-    font-weight: 300;
-    margin: 18px 0 0;
-
-    @media screen and (max-width: $screen-xs-max) {
-      font-size: 36px;
-      line-height: 46px;
-      margin-bottom: 10px;
-    }
-
-    @media screen and (max-width: $screen-xs) {
-      font-size: 28px;
-    }
-  }
-  &-link {
-    & .btn-link {
-      color: $app-global-color-white;
-    }
-  }
-  &.dark-title-text {
-    h1, a {
-      color: $app-page-portal-sidebar-bg;
-    }
-  }
-}
-
-.control-panel {
-  margin: 0;
-  padding: 24px 0 0;
-  font-size: 0;
-
-  > li {
-    list-style: none;
-    display: inline-block;
-    vertical-align: top;
-    font-size: 11px;
-
-    > a {
-      @include app-page-portal-tile-control-panel-link();
-    }
-  }
-}
-
 .popover {
   $border-width: 5px;
 
-  &.popover-#{$app-prefix}-info {
-    border: $border-width solid $app-global-color-gray-light;
+  border-radius: 0;
+
+  &.top-right {
+    left: auto !important;
+    top: auto !important;
+    right: -($border-width);
+    bottom: 100%;
+    margin-bottom: 10px;
+    min-width: 170px;
     border-radius: 0;
 
-    &.top-right {
-      left: auto !important;
-      top: auto !important;
-      right: -($border-width);
-      bottom: 100%;
-      margin-bottom: 10px;
-      min-width: 170px;
-      border: $border-width solid $app-global-color-gray-light;
-      border-radius: 0;
+    > .arrow {
+      border-width: 16px;
+      right: -($border-width) !important;
+      border-bottom: 0;
 
-      > .arrow {
-        border-top-color: $app-global-color-gray-light;
-        border-width: 16px;
-        right: -($border-width) !important;
-        border-bottom: 0;
-
-        &:after {
-          border-width: 8px !important;
-          bottom: 0;
-          margin-left: -9px;
-        }
-      }
-    }
-
-    &.bottom {
-      > .arrow {
-        margin-top: -($border-width);
-        border-bottom-color: $app-global-color-gray-light;
-        border-width: 16px;
-        top: -27px !important;
-
-        &:after {
-          border-width: 10px !important;
-          top: -4px !important;
-        }
+      &:after {
+        border-width: 8px !important;
+        bottom: 0;
+        margin-left: -9px;
       }
     }
   }
-}
 
-//$app-global-portal-color-custom: $app-global-color-primary;
-alumni-sidebar .logo {
-  padding-top: 10px;
-}
+  &.bottom {
+    > .arrow {
+      margin-top: -($border-width);
+      border-width: 16px;
+      top: -27px !important;
 
-ui-view alumni-header {
-  z-index: 101;
+      &:after {
+        border-width: 10px !important;
+        top: -4px !important;
+      }
+    }
+  }
 }

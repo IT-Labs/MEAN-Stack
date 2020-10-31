@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from 'src/app/services/company.service';
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyModel } from 'src/app/models/company-model';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -85,42 +80,32 @@ export class CompanyAccountsComponent implements OnInit {
 
   addAccount(accountModel: AccountModel) {
     this.loading = true;
-    this.companyService
-      .companyBankInsert(this.companyId, accountModel)
-      .subscribe(
+    this.companyService.companyBankInsert(this.companyId, accountModel).subscribe(
+      (data: CompanyModel) => {
+        this.form.reset();
+        this.getCompanyDetails();
+      },
+      (err: HttpErrorResponse) => {
+        this.loading = false;
+      }
+    );
+  }
+
+  deleteAccount(account: AccountModel) {
+    console.log('deleteAccount: ' + account.accountNumber);
+    let company = this.accounts.find(
+      (item) => item.accountNumber === account.accountNumber && item.bankId === account.bankId
+    );
+
+    if (confirm('Are you sure to delete account number ' + company.accountNumber + ' ?')) {
+      this.companyService.companyBankDelete(this.companyId, company.bankId).subscribe(
         (data: CompanyModel) => {
-          this.form.reset();
           this.getCompanyDetails();
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
         }
       );
-  }
-
-  deleteAccount(account: AccountModel) {
-    console.log('deleteAccount: ' + account.accountNumber);
-    let company = this.accounts.find(
-      (item) =>
-        item.accountNumber === account.accountNumber &&
-        item.bankId === account.bankId
-    );
-
-    if (
-      confirm(
-        'Are you sure to delete account number ' + company.accountNumber + ' ?'
-      )
-    ) {
-      this.companyService
-        .companyBankDelete(this.companyId, company.bankId)
-        .subscribe(
-          (data: CompanyModel) => {
-            this.getCompanyDetails();
-          },
-          (err: HttpErrorResponse) => {
-            this.loading = false;
-          }
-        );
     }
   }
 
