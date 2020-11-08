@@ -1,3 +1,67 @@
-.login-form {
-  background-color: red;
+@import '../main/variables.scss';
+@import '../main/mixins.scss';
+
+.login {
+  &__holder {
+    margin: 0 auto;
+    margin-top: 10%;
+    max-width: 450px;
+
+    .login__input {
+      position: relative;
+      & input {
+        height: 50px;
+        border-radius: 30px;
+        border: none;
+        margin-top: 20px;
+        padding: 0 5rem;
+        &::placeholder {
+          text-align: center;
+          color: $primary-color;
+          font-family: 'Verdana', sans-serif;
+          letter-spacing: 1px;
+        }
+      }
+      &::before {
+        content: '';
+        width: 1px;
+        height: 60%;
+        background: $secondary-color;
+        position: absolute;
+        left: 15%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+  &__container {
+    height: 100vh;
+    @include gradient-bg(45deg, $secondary-color, $primary-color);
+  }
+  &__logo {
+    height: 95px;
+    width: 190px;
+    margin: 0 auto;
+    filter: invert(1);
+    & img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  &__username {
+    height: 60px;
+    border-radius: 30px;
+    border: none;
+    &::placeholder {
+      text-align: center;
+      color: $primary-color;
+    }
+  }
+  &__remember-me {
+    color: $white;
+    margin-left: 5px;
+  }
+  &__btn {
+    float: right;
+  }
 }

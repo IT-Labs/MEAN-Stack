@@ -44,3 +44,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Angular
+/src/app/svg-icons
+/src/assets/svg/svg-icons.ts

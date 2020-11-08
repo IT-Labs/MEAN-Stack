@@ -1,0 +1,5 @@
+@import './variables.scss';
+
+@mixin gradient-bg($deg, $color-one, $color-two) {
+  background: linear-gradient($deg, $color-one 0%, $color-two 70%);
+}

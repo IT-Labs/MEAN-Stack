@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "prestart": "svg-to-ts",
     "start": "ng serve",
+    "prebuild": "svg-to-ts",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
@@ -26,6 +28,7 @@
     "bootstrap": "^4.0.0-beta.2",
     "jquery": "^3.5.1",
     "rxjs": "~6.5.4",
+    "svg-to-ts": "^5.7.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
@@ -49,5 +52,26 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
+  },
+  "svg-to-ts": {
+    "conversionType": "constants",
+    "srcFiles": [
+      "./src/assets/svg/*.svg"
+    ],
+    "outputDirectory": "./src/assets/svg",
+    "fileName": "svg-icons",
+    "interfaceName": "SvgIcon",
+    "typeName": "svgIcon",
+    "prefix": "icon",
+    "modelFileName": "svg-icon.model",
+    "compileSources": true,
+    "svgoConfig": {
+      "plugins": [
+        {
+          "removeDimensions": true,
+          "cleanupAttrs": true
+        }
+      ]
+    }
   }
 }
