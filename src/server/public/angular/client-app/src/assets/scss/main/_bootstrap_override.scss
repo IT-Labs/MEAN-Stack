@@ -14,4 +14,12 @@
       color: $primary-color;
     }
   }
+  &.btn-primary {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    &:hover {
+      background-color: lighten($primary-color, 10%);
+      border-color: lighten($primary-color, 10%);
+    }
+  }
 }

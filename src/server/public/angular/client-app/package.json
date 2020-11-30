@@ -9,7 +9,8 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "generate-icons": "svg-to-ts"
   },
   "private": true,
   "dependencies": {
@@ -25,8 +26,11 @@
     "@angular/platform-browser-dynamic": "~9.1.7",
     "@angular/router": "~9.1.7",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
+    "@ngneat/svg-icon": "^1.0.2",
+    "@popperjs/core": "^2.5.4",
     "bootstrap": "^4.0.0-beta.2",
     "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
     "svg-to-ts": "^5.7.1",
     "tslib": "^1.10.0",
@@ -51,20 +55,16 @@
     "protractor": "~5.4.3",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.8.3"
+    "typescript": "~3.8.3",
+    "svg-to-ts": "^5.0.0"
   },
   "svg-to-ts": {
-    "conversionType": "constants",
+    "conversionType": "object",
     "srcFiles": [
       "./src/assets/svg/*.svg"
     ],
     "outputDirectory": "./src/assets/svg",
     "fileName": "svg-icons",
-    "interfaceName": "SvgIcon",
-    "typeName": "svgIcon",
-    "prefix": "icon",
-    "modelFileName": "svg-icon.model",
-    "compileSources": true,
     "svgoConfig": {
       "plugins": [
         {

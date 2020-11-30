@@ -1,0 +1,20 @@
+.navbar {
+  justify-content: flex-end;
+  background-color: darken($primary-color, 5%);
+  height: 60px;
+  &__user {
+    color: $white;
+    vertical-align: middle;
+  }
+  &__icon {
+    vertical-align: middle;
+  }
+  &__items {
+    margin-right: 35px;
+    padding: 4px 20px;
+    &:hover {
+      background-color: $primary-color;
+      border-radius: 30px;
+    }
+  }
+}
