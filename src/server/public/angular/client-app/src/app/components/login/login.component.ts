@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 //import {ApiService} from "../service/api.service";
 
@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+  loginForm: FormGroup = new FormGroup({
+    username: new FormControl(),
+  });
   invalidLogin: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
@@ -16,13 +18,13 @@ export class LoginComponent implements OnInit {
   ) {}
 
   onSubmit() {
-    if (this.loginForm.invalid) {
-      return;
-    }
-    const loginPayload = {
-      username: this.loginForm.controls.username.value,
-      password: this.loginForm.controls.password.value,
-    };
+    // if (this.loginForm.invalid) {
+    //   return;
+    // }
+    // const loginPayload = {
+    //   username: this.loginForm.controls.username.value,
+    //   password: this.loginForm.controls.password.value,
+    // };
     // this.apiService.login(loginPayload).subscribe(data => {
     //   debugger;
     //   if(data.status === 200) {
@@ -38,10 +40,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.localStorage.removeItem('token');
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-    });
+    // window.localStorage.removeItem('token');
+    // this.loginForm = this.formBuilder.group({
+    //   username: ['', Validators.required],
+    //   password: ['', Validators.required],
+    // });
   }
 }

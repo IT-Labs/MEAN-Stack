@@ -5,12 +5,12 @@
   &__holder {
     margin: 0 auto;
     margin-top: 10%;
-    max-width: 450px;
+    max-width: 400px;
 
     .login__input {
       position: relative;
       & input {
-        height: 50px;
+        height: 2.5em;
         border-radius: 30px;
         border: none;
         margin-top: 20px;
@@ -22,7 +22,7 @@
           letter-spacing: 1px;
         }
       }
-      &::before {
+      &::after {
         content: '';
         width: 1px;
         height: 60%;
@@ -31,6 +31,12 @@
         left: 15%;
         top: 50%;
         transform: translateY(-50%);
+      }
+      & .svg-icon-avatar,
+      .svg-icon-password {
+        position: absolute;
+        left: 15px;
+        top: 2px;
       }
     }
   }
