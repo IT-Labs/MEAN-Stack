@@ -1,18 +1,39 @@
-<div class="sidebar-top">
-  <img class="sidebar-top__logo" src="../../../assets/images/m-logo.png" alt="Main company logo" />
-</div>
+<div
+  class="sidebar"
+  [ngClass]="{
+    'sidebar-closed': isSidebarClosed
+  }"
+  class="sidebar"
+>
+  <div class="sidebar-top">
+    <img
+      class="sidebar-top__logo"
+      src="../../../assets/images/m-logo.png"
+      alt="Main company logo"
+    />
+    <div
+      class="toggle-btn"
+      (click)="sidebarToggle()"
+      [ngClass]="{
+        'toggle-btn__rotate': !isSidebarClosed
+      }"
+    >
+      <svg-icon key="arrows" color="white" size="md"></svg-icon>
+    </div>
+  </div>
 
-<ul class="sidebar-nav">
-  <li class="sidebar-nav__item">
-    <a class="sidebar-nav__link" [routerLink]="['/companies']">
-      <svg-icon key="company" color="white" size="lg"></svg-icon>
-      <span class="sidebar-nav__text">Companies</span>
-    </a>
-  </li>
-  <li class="sidebar-nav__item">
-    <a class="sidebar-nav__link" [routerLink]="['/banks']">
-      <svg-icon key="bank" color="white" size="lg"></svg-icon>
-      <span class="sidebar-nav__text">Banks</span>
-    </a>
-  </li>
-</ul>
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav__item">
+      <a class="sidebar-nav__link" [routerLink]="['/companies']" routerLinkActive="active">
+        <svg-icon key="company" color="white" size="lg"></svg-icon>
+        <span class="sidebar-nav__text">Companies</span>
+      </a>
+    </li>
+    <li class="sidebar-nav__item">
+      <a class="sidebar-nav__link" [routerLink]="['/banks']" routerLinkActive="active">
+        <svg-icon key="bank" color="white" size="lg"></svg-icon>
+        <span class="sidebar-nav__text">Banks</span>
+      </a>
+    </li>
+  </ul>
+</div>

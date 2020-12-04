@@ -13,16 +13,28 @@
   background: $primary-color;
   z-index: 999;
   box-shadow: 2px 0 4px darken($primary-color, 5%);
-
+  &-closed {
+    width: 100px;
+  }
   &-top {
     height: 60px;
     background-color: darken($primary-color, 5%);
     border-bottom: 1px solid darken($primary-color, 8%);
+    position: relative;
     &__logo {
       width: auto;
       height: 100%;
       padding: 10px;
       filter: invert(1);
+    }
+    & .toggle-btn {
+      cursor: pointer;
+      position: absolute;
+      top: 30px;
+      right: 0;
+      &__rotate .svg-icon-arrows {
+        transform: rotate(180deg);
+      }
     }
   }
   &-nav {
@@ -37,17 +49,23 @@
     }
     &__text {
       font-size: 22px;
-      vertical-align: middle;
       font-weight: 700;
+      padding-left: 95px;
     }
     &__link {
       display: block;
       padding: 20px 10px;
+      position: relative;
+      &.active {
+        background-color: darken($primary-color, 5%);
+      }
     }
   }
 
   .svg-icon-company,
   .svg-icon-bank {
-    vertical-align: middle;
+    position: absolute;
+    left: 20px;
+    top: 0;
   }
 }

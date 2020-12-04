@@ -5,7 +5,7 @@
       <ks-button
         [type]="'submit'"
         [name]="'submit'"
-        [class]="'btn btn-primary'"
+        [class]="'btn btn-secondary-green'"
         [value]="'+ Add Company'"
       ></ks-button>
       <!-- <button class="btn btn-primary" style="width: 150px" (click)="addBank()">+ Add Bank</button> -->
@@ -33,7 +33,7 @@
             <th>Id</th>
             <th>Name</th>
             <th>SwiftCode</th>
-            <th></th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -42,10 +42,20 @@
             <td>{{ bank.name }}</td>
             <td>{{ bank.swiftCode }}</td>
             <td>
-              <button class="btn btn-success btn-sm" (click)="editBank(bank._id)">Edit</button>
-              <button class="btn btn-danger btn-sm ml-2" (click)="deleteBank(bank._id)">
-                Delete
-              </button>
+              <ks-button
+                [type]="'button'"
+                [name]="'editBank'"
+                [class]="'btn btn-info'"
+                [value]="'Edit'"
+                (click)="editBank(bank._id)"
+              ></ks-button>
+              <ks-button
+                [type]="'button'"
+                [name]="'deleteBank'"
+                [class]="'btn btn-danger ml-2'"
+                [value]="'Delete'"
+                (click)="deleteBank(bank._id)"
+              ></ks-button>
             </td>
           </tr>
         </tbody>

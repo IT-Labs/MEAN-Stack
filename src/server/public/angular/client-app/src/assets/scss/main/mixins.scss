@@ -3,3 +3,18 @@
 @mixin gradient-bg($deg, $color-one, $color-two) {
   background: linear-gradient($deg, $color-one 0%, $color-two 70%);
 }
+
+@mixin alerts-container {
+  padding: 20px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 0.25em;
+  margin: 20px 0;
+}
+
+@mixin alerts-role($color) {
+  background-color: $color;
+  border-color: $color;
+  color: darken($color, 65%);
+  border: 1px solid darken($color, 25%);
+}

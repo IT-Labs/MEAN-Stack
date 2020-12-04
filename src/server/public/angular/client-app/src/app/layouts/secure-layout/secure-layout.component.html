@@ -1,6 +1,6 @@
-<div class="main">
+<div class="main" [ngClass]="{ 'main-sidebar-closed': isSidebarClosed }">
   <header class="navbar"></header>
-  <aside class="sidebar"></aside>
+  <aside (toggleSidebar)="toggleSidebar($event)"></aside>
   <main></main>
   <footer></footer>
 </div>

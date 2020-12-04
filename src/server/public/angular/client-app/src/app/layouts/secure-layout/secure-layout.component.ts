@@ -4,8 +4,10 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-secure-layout',
   templateUrl: './secure-layout.component.html',
 })
-export class SecureLayoutComponent implements OnInit {
-  constructor() {}
+export class SecureLayoutComponent {
+  isSidebarClosed: boolean = true;
 
-  ngOnInit() {}
+  toggleSidebar(event) {
+    this.isSidebarClosed = event;
+  }
 }

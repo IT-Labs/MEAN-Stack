@@ -38,6 +38,10 @@ th {
 .main {
   min-height: 100vh;
   padding-left: 260px;
+  transition: all 0.5s;
+  &.main-sidebar-closed {
+    padding-left: 100px;
+  }
 }
 
 .popover {

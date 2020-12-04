@@ -1,0 +1,15 @@
+@import '../main/mixins.scss';
+@import '../main/variables.scss';
+
+.ks-alerts {
+  &__container {
+    &__warning {
+      @include alerts-container;
+      @include alerts-role($warning);
+    }
+    &__danger {
+      @include alerts-container;
+      @include alerts-role($danger);
+    }
+  }
+}

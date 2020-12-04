@@ -7,6 +7,8 @@ import { MainComponent } from './main/main.component';
 import { SecureLayoutComponent } from './secure-layout/secure-layout.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import icons from '../../assets/svg/svg-icons';
+import { KitchenSinkModule } from '../kitchen-sink/kitchen-sink.module';
+import { CommonModule } from '@angular/common';
 
 const DECLARATIONS = [
   SecureLayoutComponent,
@@ -17,6 +19,7 @@ const DECLARATIONS = [
 ];
 
 const MODULES = [
+  CommonModule,
   RouterModule,
   SvgIconsModule.forRoot({
     sizes: {
@@ -26,6 +29,7 @@ const MODULES = [
     },
     icons,
   }),
+  KitchenSinkModule,
 ];
 
 const PROVIDERS = [];
