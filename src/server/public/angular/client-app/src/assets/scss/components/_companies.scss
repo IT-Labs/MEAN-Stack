@@ -5,25 +5,5 @@
     &__input {
       position: relative;
     }
-    &__btn {
-      position: absolute;
-      background-color: $primary-color;
-      border: none;
-      right: 15px;
-      top: 0;
-      width: 2.6em;
-      height: 100%;
-      border-radius: 0 0.25rem 0.25rem 0;
-      & .svg-icon-magnifying {
-        vertical-align: sub;
-      }
-    }
-  }
-  &__table {
-    &__actions {
-      & svg-icon {
-        cursor: pointer;
-      }
-    }
   }
 }

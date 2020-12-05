@@ -3,7 +3,7 @@ import { CompanyService } from 'src/app/services/company.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CompanyModel } from 'src/app/models/company-model';
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AlertsEnum } from '../../shared/alerts.enum';
 
 @Component({
@@ -22,6 +22,18 @@ export class CompaniesComponent implements OnInit {
     searchCompanies: new FormControl(''),
   });
   AlertsEnum = AlertsEnum;
+  tableHeadItems = [
+    'Id',
+    'Name',
+    'Tax Number',
+    'Address',
+    'City',
+    'Zip Code',
+    'State',
+    'Country',
+    'Created',
+    'Actions',
+  ];
 
   constructor(private companyService: CompanyService, private router: Router) {}
 

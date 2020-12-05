@@ -11,6 +11,7 @@ import { BankComponent } from './bank/bank.component';
 import { CompanyAccountsComponent } from './company-accounts/company-accounts.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KitchenSinkModule } from '../kitchen-sink/kitchen-sink.module';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 const DECLARATIONS = [
   LoginComponent,
@@ -27,6 +28,7 @@ const MODULES = [
   BrowserModule,
   HttpClientModule,
   FormsModule,
+  TooltipModule.forRoot(),
   SvgIconsModule.forRoot(),
   KitchenSinkModule,
 ];

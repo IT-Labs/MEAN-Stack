@@ -84,3 +84,30 @@ th {
     }
   }
 }
+
+.table__actions {
+  & svg-icon {
+    cursor: pointer;
+    &:hover {
+      fill: $primary-color;
+    }
+  }
+}
+
+.search__btn {
+  position: absolute;
+  background-color: $primary-color;
+  border: none;
+  right: 15px;
+  top: 0;
+  width: 2.6em;
+  height: 100%;
+  border-radius: 0 0.25rem 0.25rem 0;
+  & .svg-icon-magnifying {
+    vertical-align: sub;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: lighten($primary-color, 8%);
+  }
+}

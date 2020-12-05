@@ -15,6 +15,7 @@ export class BanksComponent implements OnInit {
   loading: boolean = false;
   keyword: string = '';
   searchTerm: string = '';
+  tableHeadItems = ['Id', 'Name', 'SwiftCode', 'Actions'];
 
   constructor(private bankService: BankService, private router: Router) {}
 
@@ -48,12 +49,12 @@ export class BanksComponent implements OnInit {
 
   deleteBank(id) {
     console.log('Delete bank');
-    let bank = this.banks.find((item) => item._id === id);
+    let bank = this.banks.find(item => item._id === id);
 
     if (confirm('Are you sure to delete bank ' + bank.name + ' ?')) {
       this.bankService.delete(id).subscribe(
         (data: BankModel) => {
-          let list = this.banks.filter((item) => item._id !== id);
+          let list = this.banks.filter(item => item._id !== id);
           this.banks = list;
           this.total = this.banks.length;
           this.loading = false;
@@ -68,7 +69,7 @@ export class BanksComponent implements OnInit {
 
   search(): void {
     let term = this.searchTerm;
-    this.items = this.banks.filter((tag) => {
+    this.items = this.banks.filter(tag => {
       if (tag.name) return tag.name.indexOf(term) >= 0;
       else return false;
     });

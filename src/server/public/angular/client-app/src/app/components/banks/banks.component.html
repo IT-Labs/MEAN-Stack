@@ -27,39 +27,13 @@
   <div [hidden]="loading">
     <div class="table-responsive pt-1">
       <span class="float-right mr-5 mb-2">Total results {{ total }}</span>
-      <table class="table table-striped table-hover table-sm border-bottom">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>SwiftCode</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let bank of items">
-            <td>{{ bank._id }}</td>
-            <td>{{ bank.name }}</td>
-            <td>{{ bank.swiftCode }}</td>
-            <td>
-              <ks-button
-                [type]="'button'"
-                [name]="'editBank'"
-                [class]="'btn btn-info'"
-                [value]="'Edit'"
-                (click)="editBank(bank._id)"
-              ></ks-button>
-              <ks-button
-                [type]="'button'"
-                [name]="'deleteBank'"
-                [class]="'btn btn-danger ml-2'"
-                [value]="'Delete'"
-                (click)="deleteBank(bank._id)"
-              ></ks-button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <ks-table
+        [items]="items"
+        [tableHeadItems]="tableHeadItems"
+        [isBank]="true"
+        (editBank)="editBank($event)"
+        (deleteBank)="deleteBank($event)"
+      ></ks-table>
     </div>
     <div class="jumbotron" *ngIf="total == 0">
       <div class="container">

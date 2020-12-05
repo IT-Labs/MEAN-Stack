@@ -1,8 +1,9 @@
 <div class="container-fluid">
   <div class="row">
     <h2 class="col-sm-12 mt-4 mb-4">Companies</h2>
-
-    <div class="col-sm-4 mb-4">
+  </div>
+  <div class="row mb-5">
+    <div class="col-sm-4">
       <form #search [formGroup]="formGroup" (ngSubmit)="onSearch()">
         <ks-input
           [type]="'text'"
@@ -11,13 +12,12 @@
           [placeholder]="'Search companies'"
           class="companies__search__input"
         ></ks-input>
-        <button type="submit" class="companies__search__btn">
+        <button type="submit" class="search__btn">
           <svg-icon key="magnifying" size="sm" color="#fff"></svg-icon>
         </button>
       </form>
     </div>
-
-    <div class="col-sm-8 text-right mb-4">
+    <div class="col-sm-8 text-right">
       <ks-button
         [type]="'button'"
         [name]="'addCompany'"
@@ -26,67 +26,28 @@
       >
       </ks-button>
     </div>
-
+  </div>
+  <div class="row">
     <div [hidden]="loading" class="col-lg-12 companies__table">
-      <table class="table table-hover">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Tax Number</th>
-            <th scope="col">Address</th>
-            <th scope="col">City</th>
-            <th scope="col">Zip Code</th>
-            <th scope="col">State</th>
-            <th scope="col">Country</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let company of items">
-            <th scope="row">{{ company._id }}</th>
-            <td>{{ company.name }}</td>
-            <td>{{ company.taxNumber }}</td>
-            <td>{{ company.address }}</td>
-            <td>{{ company.city }}</td>
-            <td>{{ company.zipCode }}</td>
-            <td>{{ company.state }}</td>
-            <td>{{ company.country }}</td>
-            <td class="companies__table__actions">
-              <svg-icon
-                key="pencil"
-                color="#45a49e"
-                size="md"
-                (click)="editCompany(company._id)"
-              ></svg-icon>
-              <svg-icon
-                key="accounts"
-                color="#45a49e"
-                size="md"
-                (click)="companyAccounts(company._id)"
-              ></svg-icon>
-              <svg-icon
-                key="delete"
-                color="#45a49e"
-                size="md"
-                (click)="deleteCompany(company._id)"
-              ></svg-icon>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <ks-table
+        [items]="items"
+        [tableHeadItems]="tableHeadItems"
+        (companyAccounts)="companyAccounts($event)"
+        (editCompany)="editCompany($event)"
+        (deleteCompany)="deleteCompany($event)"
+      ></ks-table>
       <p class="text-right">
         Total results <strong>{{ total }}</strong>
       </p>
     </div>
   </div>
-  <div [hidden]="!loading" class="">
-    <div class="jumbotron" *ngIf="total == 0">
+  <ng-container>
+    <div [hidden]="!loading" class="jumbotron" *ngIf="total == 0">
       <div class="container">
         <p class="text-center">Loading...</p>
       </div>
     </div>
-  </div>
+  </ng-container>
   <ks-alerts
     *ngIf="!total && !loading"
     [content]="'No results found.'"

@@ -36,3 +36,11 @@
     }
   }
 }
+
+.tooltip-inner {
+  background-color: $primary-color;
+}
+.tooltip.top .tooltip-arrow:before,
+.tooltip.top .tooltip-arrow {
+  border-top-color: $primary-color;
+}
