@@ -13,6 +13,7 @@
               [name]="'username'"
               [id]="'username'"
               [placeholder]="'Username'"
+              (valueChange)="onUserChanged($event)"
             ></ks-input>
           </div>
           <div class="form-group login__input">
@@ -22,6 +23,7 @@
               [name]="'password'"
               [id]="'password'"
               [placeholder]="'Password'"
+              (valueChange)="onPassChanged($event)"
             ></ks-input>
           </div>
           <div class="form-group">

@@ -2,5 +2,6 @@
 @import './_base';
 @import './mixins.scss';
 @import '~bootstrap/dist/css/bootstrap.css';
+@import '~ngx-toastr/toastr';
 @import './_bootstrap_override';
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,400&display=swap');

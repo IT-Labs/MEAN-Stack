@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'ks-input',
@@ -10,4 +11,13 @@ export class KsInputComponent {
   @Input() id: string;
   @Input() value: string = null;
   @Input() placeholder: string;
+  @Output() valueChange = new EventEmitter<string>();
+
+  formControl = new FormControl();
+
+  ngOnInit() {
+    this.formControl.valueChanges.subscribe(res => {
+      this.valueChange.emit(res);
+    });
+  }
 }

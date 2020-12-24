@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CompaniesComponent } from './components/companies/companies.component';
-import { CompanyComponent } from './components/company/company.component';
-import { LoginComponent } from './components/login/login.component';
 import { SecureLayoutComponent } from './layouts/secure-layout/secure-layout.component';
-import { BankComponent } from './components/bank/bank.component';
-import { BanksComponent } from './components/banks/banks.component';
-import { CompanyAccountsComponent } from './components/company-accounts/company-accounts.component';
+import { CompaniesComponent } from './companies/companies/companies.component';
+import { LoginComponent } from './auth/login.component';
+import { CompanyComponent } from './companies/company/company.component';
+import { BanksComponent } from './banks/banks/banks.component';
+import { BankComponent } from './banks/bank/bank.component';
+import { CompanyAccountsComponent } from './companies/company-accounts/company-accounts.component';
 
 export const routes: Routes = [
   {
