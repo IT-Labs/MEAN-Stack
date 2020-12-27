@@ -9,21 +9,21 @@
           <div class="form-group login__input mt-5">
             <svg-icon key="avatar" color="#45a49e" size="md"></svg-icon>
             <ks-input
+              [formControl]="username"
               [type]="'text'"
               [name]="'username'"
               [id]="'username'"
               [placeholder]="'Username'"
-              (valueChange)="onUserChanged($event)"
             ></ks-input>
           </div>
           <div class="form-group login__input">
             <svg-icon key="password" color="#45a49e" size="md"></svg-icon>
             <ks-input
+              [formControl]="password"
               [type]="'password'"
               [name]="'password'"
               [id]="'password'"
               [placeholder]="'Password'"
-              (valueChange)="onPassChanged($event)"
             ></ks-input>
           </div>
           <div class="form-group">

@@ -1,81 +1,105 @@
-<div class="row mt-3 pb-2">
-  <div class="col-md-12 mt-3 pb-2 my-class">
-    <h2>{{ actionType }} Company</h2>
-    <form [formGroup]="form" (ngSubmit)="save()" #formDir="ngForm" novalidate>
-      <div class="form-group row">
-        <label class="control-label col-md-12">Name</label>
-        <div class="col-md-4">
-          <input class="form-control" type="text" formControlName="name" />
-        </div>
-        <span class="text-danger ml-3" *ngIf="name.invalid && formDir.submitted">
-          Name is required.
-        </span>
-      </div>
-      <div class="form-group row">
-        <label class="control-label col-md-12">Tax Number</label>
-        <div class="col-md-4">
-          <input class="form-control" type="text" formControlName="taxNumber" />
-        </div>
-        <span class="text-danger ml-3" *ngIf="taxNumber.invalid && formDir.submitted">
-          Tax Number is required.
-        </span>
-      </div>
+<div class="container-fluid">
+  <div class="row">
+    <h2 class="col-sm-12 mt-4 mb-4">Company</h2>
+  </div>
+  <div class="row mb-5">
+    <div class="col-sm-4">
+      <h4>Add Company</h4>
+    </div>
+    <div class="col-sm-8 text-right">
+      <ks-button
+        [type]="'button'"
+        [class]="'btn btn-gray'"
+        [value]="'Back'"
+        (click)="goBack()"
+      ></ks-button>
+    </div>
+  </div>
 
-      <div class="form-group row">
-        <label class="control-label col-md-12">Address</label>
-        <div class="col-md-4">
-          <input class="form-control" type="text" formControlName="address" />
+  <div class="row">
+    <div class="col-sm-12">
+      <form [formGroup]="form" (ngSubmit)="save()" #formDir="ngForm" novalidate>
+        <div class="row">
+          <div class="col-sm-4 company__item">
+            <label class="control-label">Name</label>
+            <ks-input [formControl]="name" [type]="'text'" [name]="'name'" [id]="'name'"></ks-input>
+            <span class="text-danger" *ngIf="isSubmited && !form.value.name"
+              >Name is required.
+            </span>
+          </div>
+          <div class="col-sm-4 company__item">
+            <label class="control-label">Tax Number</label>
+            <ks-input
+              [formControl]="taxNumber"
+              [type]="'text'"
+              [name]="'taxNumber'"
+              [id]="'taxNumber'"
+            ></ks-input>
+            <span class="text-danger" *ngIf="isSubmited && !form.value.taxNumber"
+              >Tax Number is required.
+            </span>
+          </div>
+          <div class="col-sm-4 company__item">
+            <label class="control-label">Address</label>
+            <ks-input
+              [formControl]="address"
+              [type]="'text'"
+              [name]="'address'"
+              [id]="'address'"
+            ></ks-input>
+            <span class="text-danger" *ngIf="isSubmited && !form.value.address"
+              >Address is required.
+            </span>
+          </div>
+          <div class="col-sm-4 company__item">
+            <label class="control-label">City</label>
+            <ks-input [formControl]="city" [type]="'text'" [name]="'city'" [id]="'city'"></ks-input>
+            <span class="text-danger" *ngIf="isSubmited && !form.value.city"
+              >City is required.
+            </span>
+          </div>
+          <div class="col-sm-4 company__item">
+            <label class="control-label">Zip Code</label>
+            <ks-input
+              [formControl]="zipCode"
+              [type]="'text'"
+              [name]="'zipCode'"
+              [id]="'zipCode'"
+            ></ks-input>
+            <span class="text-danger" *ngIf="isSubmited && !form.value.zipCode"
+              >Zip Code is required.
+            </span>
+          </div>
+          <div class="col-sm-4 company__item">
+            <label class="control-label">State</label>
+            <ks-input
+              [formControl]="state"
+              [type]="'text'"
+              [name]="'state'"
+              [id]="'state'"
+            ></ks-input>
+            <span class="text-danger" *ngIf="isSubmited && !form.value.state">
+              State is required.
+            </span>
+          </div>
+          <div class="col-sm-4 company__item">
+            <label class="control-label">Country</label>
+            <ks-input
+              [formControl]="country"
+              [type]="'text'"
+              [name]="'country'"
+              [id]="'country'"
+            ></ks-input>
+            <span class="text-danger" *ngIf="isSubmited && !form.value.country">
+              Country is required.
+            </span>
+          </div>
         </div>
-        <span class="text-danger ml-3" *ngIf="address.invalid && formDir.submitted">
-          Address is required.
-        </span>
-      </div>
-
-      <div class="form-group row">
-        <label class="control-label col-md-12">City</label>
-        <div class="col-md-4">
-          <input class="form-control" type="text" formControlName="city" />
+        <div class="form-group form-group text-right mt-5 mb-5">
+          <button type="submit" class="btn btn-success">Save</button>
+          <button class="btn btn-secondary ml-2" (click)="cancel()">Cancel</button>
         </div>
-        <span class="text-danger ml-3" *ngIf="city.invalid && formDir.submitted">
-          City is required.
-        </span>
-      </div>
-
-      <div class="form-group row">
-        <label class="control-label col-md-12">Zip Code</label>
-        <div class="col-md-4">
-          <input class="form-control" type="text" formControlName="zipCode" />
-        </div>
-        <span class="text-danger ml-3" *ngIf="zipCode.invalid && formDir.submitted">
-          Zip Code is required.
-        </span>
-      </div>
-
-      <div class="form-group row">
-        <label class="control-label col-md-12">State</label>
-        <div class="col-md-4">
-          <input class="form-control" type="text" formControlName="state" />
-        </div>
-        <span class="text-danger ml-3" *ngIf="state.invalid && formDir.submitted">
-          State is required.
-        </span>
-      </div>
-
-      <div class="form-group row">
-        <label class="control-label col-md-12">Country</label>
-        <div class="col-md-4">
-          <input class="form-control" type="text" formControlName="country" />
-        </div>
-        <span class="text-danger ml-3" *ngIf="country.invalid && formDir.submitted">
-          Country is required.
-        </span>
-      </div>
-
-      <div class="form-group">
-        <button type="submit" class="btn btn-success">Save</button>
-        <button class="btn btn-secondary ml-2" (click)="cancel()">Cancel</button>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>
-<br />

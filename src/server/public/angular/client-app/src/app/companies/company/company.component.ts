@@ -15,6 +15,7 @@ export class CompanyComponent implements OnInit {
   companyId: string;
   errorMessage: any;
   company: CompanyModel;
+  isSubmited: boolean = false;
 
   constructor(
     private companyService: CompanyService,
@@ -44,26 +45,22 @@ export class CompanyComponent implements OnInit {
 
   ngOnInit() {
     if (this.actionType === 'Edit') {
-      this.companyService.getById(this.companyId.toString()).subscribe(
-        (data: CompanyModel) => {
-          this.company = data as CompanyModel;
-          this.form.controls['name'].setValue(this.company.name);
-          this.form.controls['taxNumber'].setValue(this.company.taxNumber);
-          this.form.controls['address'].setValue(this.company.address);
-          this.form.controls['city'].setValue(this.company.city);
-          this.form.controls['zipCode'].setValue(this.company.zipCode);
-          this.form.controls['state'].setValue(this.company.state);
-          this.form.controls['country'].setValue(this.company.country);
-        },
-        (err: HttpErrorResponse) => {
-          console.log(err.message);
-          //this.loading = false;
-        }
-      );
+      this.companyService.getById(this.companyId).subscribe((data: CompanyModel) => {
+        this.company = data as CompanyModel;
+        this.form.controls['name'].setValue(this.company.name);
+        this.form.controls['taxNumber'].setValue(this.company.taxNumber);
+        this.form.controls['address'].setValue(this.company.address);
+        this.form.controls['city'].setValue(this.company.city);
+        this.form.controls['zipCode'].setValue(this.company.zipCode);
+        this.form.controls['state'].setValue(this.company.state);
+        this.form.controls['country'].setValue(this.company.country);
+      });
+      console.log(this.form);
     }
   }
 
   save() {
+    this.isSubmited = true;
     if (!this.form.valid) {
       return;
     }
@@ -79,7 +76,7 @@ export class CompanyComponent implements OnInit {
 
     if (this.actionType === 'Add') {
       this.companyService.insert(companyModel).subscribe(
-        (data) => {
+        data => {
           this.router.navigate(['/companies', data]);
         },
         (err: HttpErrorResponse) => {
@@ -91,7 +88,7 @@ export class CompanyComponent implements OnInit {
 
     if (this.actionType === 'Edit') {
       this.companyService.update(this.companyId, companyModel).subscribe(
-        (data) => {
+        data => {
           this.router.navigate(['/companies']);
         },
         (err: HttpErrorResponse) => {
@@ -132,5 +129,9 @@ export class CompanyComponent implements OnInit {
 
   get country() {
     return this.form.get('country');
+  }
+
+  goBack() {
+    this.router.navigate(['/companies']);
   }
 }

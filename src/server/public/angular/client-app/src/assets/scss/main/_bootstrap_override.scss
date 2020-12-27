@@ -35,6 +35,15 @@
       border-color: darken($secondary-green, 10%);
     }
   }
+  &.btn-gray {
+    background-color: $gray;
+    border-color: $gray;
+    color: $white;
+    &:hover {
+      background-color: darken($gray, 10%);
+      border-color: darken($gray, 10%);
+    }
+  }
 }
 
 .tooltip-inner {

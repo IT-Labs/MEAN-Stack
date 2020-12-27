@@ -1,29 +1,13 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormControlName,
-  FormGroup,
-  NG_VALUE_ACCESSOR,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => LoginComponent),
-      multi: true,
-    },
-  ],
 })
 export class LoginComponent implements OnInit {
-  username: string;
-  password: string;
   loginForm: FormGroup;
 
   constructor(
@@ -55,14 +39,15 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/companies']);
       localStorage.setItem('token', 'data.result.token-23842783wjkefkwefkf');
     } else {
-      this.toastr.error(`Invalid email or passsword.`);
+      this.toastr.error(`Invalid email or password.`);
     }
   }
 
-  onUserChanged(event) {
-    this.loginForm.value.username = event;
+  get username() {
+    return this.loginForm.get('username');
   }
-  onPassChanged(event) {
-    this.loginForm.value.password = event;
+
+  get password() {
+    return this.loginForm.get('password');
   }
 }
