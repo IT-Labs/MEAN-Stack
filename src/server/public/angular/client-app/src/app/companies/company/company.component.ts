@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CompanyModel } from 'src/app/models/company-model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CompanyService } from 'src/app/services/company.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import * as logLevel from 'loglevel';
+import { Subscription } from 'rxjs';
+import { CompanyModel } from '../../models/company-model';
+import { CompanyService } from '../../services/company.service';
+import { ActionType } from '../../models/action-type-model';
 
 @Component({
   selector: 'app-company',
@@ -16,12 +20,14 @@ export class CompanyComponent implements OnInit {
   errorMessage: any;
   company: CompanyModel;
   isSubmited: boolean = false;
+  subscription = new Subscription();
 
   constructor(
     private companyService: CompanyService,
     private formBuilder: FormBuilder,
     private avRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     const idParam = 'id';
 
@@ -44,18 +50,22 @@ export class CompanyComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.actionType === 'Edit') {
-      this.companyService.getById(this.companyId).subscribe((data: CompanyModel) => {
-        this.company = data as CompanyModel;
-        this.form.controls['name'].setValue(this.company.name);
-        this.form.controls['taxNumber'].setValue(this.company.taxNumber);
-        this.form.controls['address'].setValue(this.company.address);
-        this.form.controls['city'].setValue(this.company.city);
-        this.form.controls['zipCode'].setValue(this.company.zipCode);
-        this.form.controls['state'].setValue(this.company.state);
-        this.form.controls['country'].setValue(this.company.country);
-      });
-      console.log(this.form);
+    if (this.actionType === ActionType.edit) {
+      this.subscription.add(
+        this.companyService.getById(this.companyId).subscribe(
+          (data: CompanyModel) => {
+            this.company = data;
+            this.form.controls['name'].setValue(this.company.name);
+            this.form.controls['taxNumber'].setValue(this.company.taxNumber);
+            this.form.controls['address'].setValue(this.company.address);
+            this.form.controls['city'].setValue(this.company.city);
+            this.form.controls['zipCode'].setValue(this.company.zipCode);
+            this.form.controls['state'].setValue(this.company.state);
+            this.form.controls['country'].setValue(this.company.country);
+          },
+          () => this.toastr.error(`Error getting company info.`)
+        )
+      );
     }
   }
 
@@ -65,36 +75,35 @@ export class CompanyComponent implements OnInit {
       return;
     }
 
-    let companyModel = new CompanyModel();
-    companyModel.name = this.name.value;
-    companyModel.taxNumber = this.taxNumber.value;
-    companyModel.address = this.address.value;
-    companyModel.city = this.city.value;
-    companyModel.zipCode = this.zipCode.value;
-    companyModel.state = this.state.value;
-    companyModel.country = this.country.value;
+    let companyModel = this.form.value;
 
-    if (this.actionType === 'Add') {
-      this.companyService.insert(companyModel).subscribe(
-        data => {
-          this.router.navigate(['/companies', data]);
-        },
-        (err: HttpErrorResponse) => {
-          console.log(err.message);
-          //this.loading = false;
-        }
+    if (this.actionType === ActionType.add) {
+      delete this.form.value.id;
+      this.subscription.add(
+        this.companyService.insert(companyModel).subscribe(
+          data => {
+            this.router.navigate(['/companies', data]);
+          },
+          (err: HttpErrorResponse) => {
+            logLevel.debug('Error with adding a new company.', err.message);
+            this.toastr.error(`Error with adding a new company.`);
+          }
+        )
       );
     }
 
     if (this.actionType === 'Edit') {
-      this.companyService.update(this.companyId, companyModel).subscribe(
-        data => {
-          this.router.navigate(['/companies']);
-        },
-        (err: HttpErrorResponse) => {
-          console.log(err.message);
-          //this.loading = false;
-        }
+      delete this.form.value.id;
+      this.subscription.add(
+        this.companyService.update(this.companyId, companyModel).subscribe(
+          data => {
+            this.router.navigate(['/companies']);
+          },
+          (err: HttpErrorResponse) => {
+            logLevel.debug('Error with editing a company.', err.message);
+            this.toastr.error(`Error with editing a company.`);
+          }
+        )
       );
     }
   }
@@ -103,35 +112,11 @@ export class CompanyComponent implements OnInit {
     this.router.navigate(['/companies']);
   }
 
-  get name() {
-    return this.form.get('name');
-  }
-
-  get taxNumber() {
-    return this.form.get('taxNumber');
-  }
-
-  get address() {
-    return this.form.get('address');
-  }
-
-  get city() {
-    return this.form.get('city');
-  }
-
-  get zipCode() {
-    return this.form.get('zipCode');
-  }
-
-  get state() {
-    return this.form.get('state');
-  }
-
-  get country() {
-    return this.form.get('country');
-  }
-
   goBack() {
     this.router.navigate(['/companies']);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

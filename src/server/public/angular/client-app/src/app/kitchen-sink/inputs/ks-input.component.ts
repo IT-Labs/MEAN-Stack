@@ -19,8 +19,8 @@ export class KsInputComponent implements ControlValueAccessor {
   @Input() placeholder: string;
   @Input() formControl = new FormControl('');
 
-  private onChange: (name: string) => void;
-  private onTouched: () => void;
+  private onChange = (value: any) => {};
+  private onTouched = () => {};
 
   writeValue(obj: any): void {
     const companyName = String(obj);
@@ -49,11 +49,4 @@ export class KsInputComponent implements ControlValueAccessor {
   doBlur() {
     this.onTouched();
   }
-
-  // ngOnInit() {
-  //   debugger;
-  //   this.formControl.valueChanges.subscribe(res => {
-  //     this.valueChange.emit(res);
-  //   });
-  // }
 }

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CompanyService } from 'src/app/services/company.service';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CompanyModel } from 'src/app/models/company-model';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AccountModel } from 'src/app/models/account-model';
-import { BankService } from 'src/app/services/bank.service';
-import { BankModel } from 'src/app/models/bank-model';
+import { Subscription } from 'rxjs';
+import { BankModel } from '../../models/bank-model';
+import { CompanyService } from '../../services/company.service';
+import { BankService } from '../../services/bank.service';
+import { CompanyModel, AccountModel } from '../../models/company-model';
 
 @Component({
   selector: 'app-company-accounts',
@@ -18,15 +18,13 @@ export class CompanyAccountsComponent implements OnInit {
   company: CompanyModel;
   accounts: AccountModel[];
   total: number = 0;
-
   loading: boolean = false;
   banks: BankModel[];
-
   form: FormGroup;
+  subscription = new Subscription();
 
   constructor(
     private companyService: CompanyService,
-    private formBuilder: FormBuilder,
     private avRoute: ActivatedRoute,
     private router: Router,
     private bankService: BankService
@@ -45,13 +43,14 @@ export class CompanyAccountsComponent implements OnInit {
   }
 
   ngOnInit() {
+    debugger;
     this.getCompanyDetails();
     this.getBanks();
   }
 
   getCompanyDetails() {
     this.loading = true;
-    this.companyService.getById(this.companyId.toString()).subscribe(
+    this.companyService.getById(this.companyId).subscribe(
       (data: CompanyModel) => {
         this.company = data as CompanyModel;
         this.accounts = this.company.companyBanks || [];
@@ -94,7 +93,7 @@ export class CompanyAccountsComponent implements OnInit {
   deleteAccount(account: AccountModel) {
     console.log('deleteAccount: ' + account.accountNumber);
     let company = this.accounts.find(
-      (item) => item.accountNumber === account.accountNumber && item.bankId === account.bankId
+      item => item.accountNumber === account.accountNumber && item.bankId === account.bankId
     );
 
     if (confirm('Are you sure to delete account number ' + company.accountNumber + ' ?')) {
@@ -115,7 +114,7 @@ export class CompanyAccountsComponent implements OnInit {
 
   submit() {
     let bank = this.form.value['bankId'];
-
+    debugger;
     let accountModel = new AccountModel();
     accountModel.bankId = bank._id;
     accountModel.bankName = bank.name;
@@ -126,5 +125,9 @@ export class CompanyAccountsComponent implements OnInit {
 
   onChange(e) {
     console.log(e.target.value);
+  }
+
+  cancel() {
+    this.router.navigate(['/companies']);
   }
 }

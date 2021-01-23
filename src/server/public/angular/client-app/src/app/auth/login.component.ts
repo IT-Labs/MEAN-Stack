@@ -42,12 +42,4 @@ export class LoginComponent implements OnInit {
       this.toastr.error(`Invalid email or password.`);
     }
   }
-
-  get username() {
-    return this.loginForm.get('username');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
-  }
 }

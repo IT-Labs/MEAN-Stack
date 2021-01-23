@@ -9,7 +9,7 @@
           <div class="form-group login__input mt-5">
             <svg-icon key="avatar" color="#45a49e" size="md"></svg-icon>
             <ks-input
-              [formControl]="username"
+              [formControl]="loginForm.get('username')"
               [type]="'text'"
               [name]="'username'"
               [id]="'username'"
@@ -19,7 +19,7 @@
           <div class="form-group login__input">
             <svg-icon key="password" color="#45a49e" size="md"></svg-icon>
             <ks-input
-              [formControl]="password"
+              [formControl]="loginForm.get('password')"
               [type]="'password'"
               [name]="'password'"
               [id]="'password'"

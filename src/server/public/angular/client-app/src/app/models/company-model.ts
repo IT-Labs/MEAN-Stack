@@ -1,13 +1,18 @@
-import { AccountModel } from './account-model';
-
-export class CompanyModel {
-  _id: string;
-  name: string;
-  taxNumber: string;
+export interface CompanyModel {
   address: string;
   city: string;
-  zipCode: number;
-  state: number;
   country: number;
   companyBanks?: AccountModel[];
+  _id: string;
+  name: string;
+  state: number;
+  taxNumber: string;
+  zipCode: number;
+}
+
+export class AccountModel {
+  accountNumber: string;
+  bankId: string;
+  bankName: string;
+  currency: string;
 }
