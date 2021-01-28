@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{ modalTitle }}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="decline.emit()">
+    <svg-icon key="times" size="md"></svg-icon>
+  </button>
+</div>
+<div class="modal-body">
+  {{ modalBody }}
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-gray" *ngIf="declineMsg" (click)="decline.emit()">
+    {{ declineMsg }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-secondary-green"
+    *ngIf="confirmMsg"
+    (click)="confirm.emit($event)"
+  >
+    {{ confirmMsg }}
+  </button>
+</div>

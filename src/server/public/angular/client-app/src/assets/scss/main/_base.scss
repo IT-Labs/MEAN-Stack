@@ -1,5 +1,8 @@
 @import './variables';
 
+main {
+  min-height: calc(100vh - 100px);
+}
 body {
   font-family: 'Lato', sans-serif;
   font-weight: 400;
@@ -112,12 +115,19 @@ th {
   }
 }
 
+// Remove arrows from input type number
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
 input[type='number'] {
   -moz-appearance: textfield;
+}
+
+// Large modal
+@media (min-width: 992px) {
+  .modal-dialog {
+    max-width: 800px;
+  }
 }

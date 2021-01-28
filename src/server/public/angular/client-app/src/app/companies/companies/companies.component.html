@@ -33,22 +33,18 @@
       <ks-table
         [items]="items"
         [tableHeadItems]="tableHeadItems"
+        [hasEdit]="true"
+        [hasAccounts]="true"
+        [hasDelete]="true"
         (companyAccounts)="companyAccounts($event)"
-        (editCompany)="editCompany($event)"
-        (deleteCompany)="deleteCompany($event)"
+        (editItem)="editCompany($event)"
+        (deleteItem)="deleteCompany($event)"
       ></ks-table>
       <p class="text-right">
         Total results <strong>{{ total }}</strong>
       </p>
     </div>
   </div>
-  <ng-container>
-    <div [hidden]="!loading" class="jumbotron" *ngIf="total == 0">
-      <div class="container">
-        <p class="text-center">Loading...</p>
-      </div>
-    </div>
-  </ng-container>
   <ks-alerts
     *ngIf="!total && !loading"
     [content]="'No results found.'"

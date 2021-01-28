@@ -7,65 +7,62 @@
     </tr>
   </thead>
   <tbody>
-    <ng-container *ngIf="isBank; else companyTemp">
-      <tr *ngFor="let bank of items">
-        <td>{{ bank._id }}</td>
-        <td>{{ bank.name }}</td>
-        <td>{{ bank.swiftCode }}</td>
-        <td>
-          <svg-icon
-            key="pencil"
-            color="#45a49e"
-            size="md"
-            tooltip="Edit"
-            (click)="editBank.emit(bank._id)"
-          ></svg-icon>
-          <svg-icon
-            key="delete"
-            color="#45a49e"
-            size="md"
-            tooltip="Delete"
-            (click)="deleteBank.emit(bank._id)"
-          ></svg-icon>
-        </td>
-      </tr>
-    </ng-container>
+    <tr *ngFor="let item of items">
+      <ng-container *ngIf="isBank">
+        <th scope="row">{{ item._id }}</th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.swiftCode }}</td>
+      </ng-container>
+      <ng-container *ngIf="!isBank">
+        <th scope="row">{{ item._id }}</th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.taxNumber }}</td>
+        <td>{{ item.address }}</td>
+        <td>{{ item.city }}</td>
+        <td>{{ item.zipCode }}</td>
+        <td>{{ item.state }}</td>
+        <td>{{ item.country }}</td>
+        <td>{{ item.created | date: 'dd MMM yyyy' }}</td>
+      </ng-container>
+
+      <td class="table-actions">
+        <svg-icon
+          key="pencil"
+          color="#45a49e"
+          size="md"
+          tooltip="Edit"
+          placement="bottom"
+          (click)="editItem.emit(item._id)"
+          *ngIf="hasEdit"
+        ></svg-icon>
+        <svg-icon
+          key="accounts"
+          color="#45a49e"
+          size="md"
+          tooltip="Accounts"
+          placement="bottom"
+          (click)="companyAccounts.emit(item._id)"
+          *ngIf="hasAccounts"
+        ></svg-icon>
+        <svg-icon
+          key="delete"
+          color="#45a49e"
+          size="md"
+          tooltip="Delete"
+          placement="bottom"
+          (click)="deleteItem.emit(item._id)"
+          *ngIf="hasDelete"
+        ></svg-icon>
+        <svg-icon
+          key="add"
+          color="#45a49e"
+          size="md"
+          tooltip="Add Account"
+          placement="bottom"
+          *ngIf="hasAdd"
+          (click)="addAccount.emit(item)"
+        ></svg-icon>
+      </td>
+    </tr>
   </tbody>
 </table>
-
-<ng-template #companyTemp>
-  <tr *ngFor="let company of items">
-    <th scope="row">{{ company._id }}</th>
-    <td>{{ company.name }}</td>
-    <td>{{ company.taxNumber }}</td>
-    <td>{{ company.address }}</td>
-    <td>{{ company.city }}</td>
-    <td>{{ company.zipCode }}</td>
-    <td>{{ company.state }}</td>
-    <td>{{ company.country }}</td>
-    <td>{{ company.created | date: 'dd MMM yyyy' }}</td>
-    <td class="table__actions">
-      <svg-icon
-        key="pencil"
-        color="#45a49e"
-        size="md"
-        tooltip="Edit"
-        (click)="editCompany.emit(company._id)"
-      ></svg-icon>
-      <svg-icon
-        key="accounts"
-        color="#45a49e"
-        size="md"
-        tooltip="Accounts"
-        (click)="companyAccounts.emit(company._id)"
-      ></svg-icon>
-      <svg-icon
-        key="delete"
-        color="#45a49e"
-        size="md"
-        tooltip="Delete"
-        (click)="deleteCompany.emit(company._id)"
-      ></svg-icon>
-    </td>
-  </tr>
-</ng-template>

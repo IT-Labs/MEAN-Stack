@@ -13,4 +13,5 @@ export class KsButtonComponent {
   @Input() name: string;
   @Input() value: string;
   @Input() class: string;
+  @Input() size: string;
 }

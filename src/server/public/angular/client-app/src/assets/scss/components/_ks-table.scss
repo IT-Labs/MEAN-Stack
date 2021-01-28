@@ -1,0 +1,8 @@
+@import '../main/variables.scss';
+
+.table-actions {
+  cursor: pointer;
+  & svg-icon:hover {
+    color: $primary-color !important;
+  }
+}

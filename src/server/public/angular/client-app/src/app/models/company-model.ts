@@ -11,8 +11,7 @@ export interface CompanyModel {
 }
 
 export class AccountModel {
-  accountNumber: string;
-  bankId: string;
-  bankName: string;
-  currency: string;
+  name: string;
+  swiftCode: string;
+  _id: string;
 }

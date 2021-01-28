@@ -1,3 +1,57 @@
+<div class="container-fluid">
+  <div class="row">
+    <h2 class="col-sm-12 mt-4 mb-4">Bank</h2>
+  </div>
+  <div class="row mb-5">
+    <div class="col-sm-4">
+      <h4>{{ actionType === 'Add' ? 'Add Bank' : 'Edit Bank' }}</h4>
+    </div>
+    <div class="col-sm-8 text-right">
+      <ks-button
+        [type]="'button'"
+        [class]="'btn btn-gray'"
+        [value]="'Back'"
+        (click)="cancel()"
+      ></ks-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <form [formGroup]="form" (ngSubmit)="save()" #formDir="ngForm" novalidate>
+        <div class="row">
+          <div class="col-sm-4 company__item">
+            <label class="control-label">Name</label>
+            <input class="form-control" type="text" formControlName="name" />
+            <span class="text-danger" *ngIf="isSubmited && !form.value.name">
+              Name is required.
+            </span>
+          </div>
+          <div class="col-sm-4 company__item">
+            <label class="control-label">Swift Code</label>
+            <input class="form-control" type="text" formControlName="swiftCode" />
+            <span class="text-danger" *ngIf="isSubmited && !form.value.swiftCode">
+              Swift Code is required.
+            </span>
+          </div>
+        </div>
+        <div class="text-right mb-5">
+          <ks-button
+            [type]="'button'"
+            [class]="'btn btn-gray'"
+            [value]="'Cancel'"
+            (click)="cancel()"
+          ></ks-button>
+          <ks-button
+            [type]="'submit'"
+            [class]="'btn btn-secondary-green ml-2'"
+            [value]="'Save'"
+          ></ks-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- 
 <div class="row mt-3 pb-2">
   <div class="col-md-12 mt-3 pb-2">
     <h2>{{ actionType }} Bank</h2>
@@ -21,10 +75,10 @@
         </span>
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-success">Save</button>
+        <button type="submit" class="btn btn-secondary-green">Save</button>
         <button class="btn btn-secondary ml-2" (click)="cancel()">Cancel</button>
       </div>
     </form>
   </div>
 </div>
-<br />
+<br /> -->

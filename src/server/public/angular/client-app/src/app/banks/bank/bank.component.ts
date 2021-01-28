@@ -15,6 +15,7 @@ export class BankComponent implements OnInit {
   bankId: string;
   errorMessage: any;
   bank: BankModel;
+  isSubmited: boolean = false;
 
   constructor(
     private bankService: BankService,
@@ -40,7 +41,7 @@ export class BankComponent implements OnInit {
   ngOnInit() {
     if (this.actionType === 'Edit') {
       this.bankService.getById(this.bankId.toString()).subscribe(
-        (data) => {
+        data => {
           this.bank = data as BankModel;
           this.form.controls['name'].setValue(this.bank.name);
           this.form.controls['swiftCode'].setValue(this.bank.swiftCode);
@@ -54,6 +55,8 @@ export class BankComponent implements OnInit {
   }
 
   save() {
+    this.isSubmited = true;
+
     if (!this.form.valid) {
       return;
     }
@@ -64,7 +67,7 @@ export class BankComponent implements OnInit {
 
     if (this.actionType === 'Add') {
       this.bankService.insert(bankModel).subscribe(
-        (data) => {
+        data => {
           this.router.navigate(['/banks', data]);
         },
         (err: HttpErrorResponse) => {
@@ -76,7 +79,7 @@ export class BankComponent implements OnInit {
 
     if (this.actionType === 'Edit') {
       this.bankService.update(this.bankId, bankModel).subscribe(
-        (data) => {
+        data => {
           this.router.navigate(['/banks']);
         },
         (err: HttpErrorResponse) => {

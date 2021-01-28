@@ -9,9 +9,12 @@ export class KsTableComponent {
   @Input() items: any;
   @Input() tableHeadItems: string[];
   @Input() isBank: boolean = false;
+  @Input() hasAccounts: boolean = false;
+  @Input() hasAdd: boolean = false;
+  @Input() hasDelete: boolean = false;
+  @Input() hasEdit: boolean = false;
+  @Output() addAccount = new EventEmitter<any>();
   @Output() companyAccounts = new EventEmitter<number>();
-  @Output() editCompany = new EventEmitter<number>();
-  @Output() deleteCompany = new EventEmitter<number>();
-  @Output() editBank = new EventEmitter<number>();
-  @Output() deleteBank = new EventEmitter<number>();
+  @Output() editItem = new EventEmitter<number>();
+  @Output() deleteItem = new EventEmitter<number>();
 }

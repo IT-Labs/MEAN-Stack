@@ -3,6 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { BankService } from 'src/app/services/bank.service';
 import { Router } from '@angular/router';
 import { BankModel } from 'src/app/models/bank-model';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-banks',
@@ -16,6 +17,9 @@ export class BanksComponent implements OnInit {
   keyword: string = '';
   searchTerm: string = '';
   tableHeadItems = ['Id', 'Name', 'SwiftCode', 'Actions'];
+  formGroup: FormGroup = new FormGroup({
+    searchCompanies: new FormControl(''),
+  });
 
   constructor(private bankService: BankService, private router: Router) {}
 
@@ -31,7 +35,7 @@ export class BanksComponent implements OnInit {
         this.banks = res;
         this.total = this.banks.length;
         this.loading = false;
-        this.search();
+        this.onSearch();
       },
       (err: HttpErrorResponse) => {
         this.loading = false;
@@ -58,7 +62,7 @@ export class BanksComponent implements OnInit {
           this.banks = list;
           this.total = this.banks.length;
           this.loading = false;
-          this.search();
+          this.onSearch();
         },
         (err: HttpErrorResponse) => {
           this.loading = false;
@@ -67,7 +71,7 @@ export class BanksComponent implements OnInit {
     }
   }
 
-  search(): void {
+  onSearch(): void {
     let term = this.searchTerm;
     this.items = this.banks.filter(tag => {
       if (tag.name) return tag.name.indexOf(term) >= 0;

@@ -31,11 +31,11 @@ export class CompanyService {
     return this.http.delete(`${this.endpoint}/${id}`);
   }
 
-  companyBankInsert(id, model) {
+  companyBankInsert(id, model?) {
     return this.http.post(`${this.endpoint}/${id}/companybank`, model);
   }
 
-  companyBankDelete(id, bankid) {
-    return this.http.delete(`${this.endpoint}/${id}/companybank/${bankid}`);
+  companyBankDelete(id, bankId) {
+    return this.http.delete(`${this.endpoint}/${id}/companybank/${bankId}`);
   }
 }

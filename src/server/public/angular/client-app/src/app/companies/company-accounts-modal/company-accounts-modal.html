@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Add accounts</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
+    <svg-icon key="times" size="md"></svg-icon>
+  </button>
+</div>
+<div class="modal-body">
+  <ks-table
+    [items]="items"
+    [tableHeadItems]="tableHeadItems"
+    [isBank]="true"
+    [hasAdd]="true"
+    (addAccount)="addAccount($event)"
+  ></ks-table>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-gray " (click)="close()">Close</button>
+</div>

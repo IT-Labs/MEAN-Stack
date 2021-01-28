@@ -28,7 +28,7 @@
           </div>
           <div class="col-sm-4 company__item">
             <label class="control-label">Tax Number</label>
-            <input class="form-control" type="number" formControlName="taxNumber" />
+            <input class="form-control" type="text" formControlName="taxNumber" />
             <span class="text-danger" *ngIf="isSubmited && !form.value.taxNumber">
               Tax Number is required.
             </span>
@@ -49,7 +49,7 @@
           </div>
           <div class="col-sm-4 company__item">
             <label class="control-label">Zip Code</label>
-            <input class="form-control" type="number" formControlName="zipCode" />
+            <input class="form-control" type="text" formControlName="zipCode" />
             <span class="text-danger" *ngIf="isSubmited && !form.value.zipCode">
               Zip Code is required.
             </span>
@@ -69,7 +69,7 @@
             </span>
           </div>
         </div>
-        <div class="form-group form-group text-right mt-5 mb-5">
+        <div class="text-right mb-5">
           <ks-button
             [type]="'button'"
             [class]="'btn btn-gray'"
@@ -78,7 +78,7 @@
           ></ks-button>
           <ks-button
             [type]="'submit'"
-            [class]="'btn btn-success ml-2'"
+            [class]="'btn btn-secondary-green ml-2'"
             [value]="'Save'"
           ></ks-button>
         </div>

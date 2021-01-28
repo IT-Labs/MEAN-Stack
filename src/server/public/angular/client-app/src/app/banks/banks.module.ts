@@ -7,6 +7,7 @@ import { BankComponent } from './bank/bank.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KitchenSinkModule } from '../kitchen-sink/kitchen-sink.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { SvgIconsModule } from '@ngneat/svg-icon';
 
 const DECLARATIONS = [BanksComponent, BankComponent];
 
@@ -18,6 +19,7 @@ const MODULES = [
   FormsModule,
   TooltipModule.forRoot(),
   KitchenSinkModule,
+  SvgIconsModule.forRoot(),
 ];
 
 const PROVIDERS = [];

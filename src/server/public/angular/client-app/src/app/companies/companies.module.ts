@@ -9,8 +9,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KitchenSinkModule } from '../kitchen-sink/kitchen-sink.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { SvgIconsModule } from '@ngneat/svg-icon';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { CompanyAccountsModal } from './company-accounts-modal/company-accounts-modal';
 
-const DECLARATIONS = [CompaniesComponent, CompanyComponent, CompanyAccountsComponent];
+const DECLARATIONS = [
+  CompaniesComponent,
+  CompanyComponent,
+  CompanyAccountsComponent,
+  CompanyAccountsModal,
+];
 
 const MODULES = [
   ReactiveFormsModule,
@@ -20,6 +27,7 @@ const MODULES = [
   FormsModule,
   TooltipModule.forRoot(),
   KitchenSinkModule,
+  ModalModule.forRoot(),
   SvgIconsModule.forRoot(),
 ];
 
