@@ -1,0 +1,36 @@
+@import '../main/variables.scss';
+
+.profile-dropdown {
+  & .popover-body {
+    padding: 0;
+  }
+  & .svg-icon-gears,
+  & .svg-icon-out {
+    vertical-align: middle;
+    padding-right: 7px;
+    margin-left: 10px;
+  }
+
+  &__link {
+    display: inline-block;
+    vertical-align: middle;
+    min-width: 150px;
+    border-left: 1px solid lighten($gray, 40%);
+    padding: 8px 20px 9px 10px;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    &:hover {
+      background-color: lighten($gray, 60%);
+    }
+  }
+  &__item:first-child {
+    & .profile-dropdown__link {
+      padding-top: 15px;
+    }
+  }
+  &__item:last-child {
+    & .profile-dropdown__link {
+      padding-bottom: 15px;
+    }
+  }
+}

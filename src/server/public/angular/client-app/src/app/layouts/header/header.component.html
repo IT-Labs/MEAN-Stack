@@ -1,4 +1,17 @@
-<a href="#" (click)="$event.preventDefault()" class="navbar__items">
+<a
+  href="#"
+  (click)="$event.preventDefault()"
+  class="navbar__items"
+  [popover]="userDropdown"
+  placement="bottom"
+  container="body"
+  [outsideClick]="true"
+  containerClass="profile-dropdown"
+>
   <svg-icon class="navbar__icon" key="avatar" color="white" size="md"></svg-icon>
   <span class="navbar__user">Current Username</span>
 </a>
+
+<ng-template #userDropdown>
+  <profile-dropdown></profile-dropdown>
+</ng-template>

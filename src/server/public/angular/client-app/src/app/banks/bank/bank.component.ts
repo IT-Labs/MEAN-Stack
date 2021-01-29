@@ -72,7 +72,6 @@ export class BankComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           console.log(err.message);
-          //this.loading = false;
         }
       );
     }
@@ -84,14 +83,9 @@ export class BankComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           console.log(err.message);
-          //this.loading = false;
         }
       );
     }
-  }
-
-  cancel() {
-    this.router.navigate(['/banks']);
   }
 
   get name() {

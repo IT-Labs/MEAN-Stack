@@ -43,10 +43,6 @@ export class BanksComponent implements OnInit {
     );
   }
 
-  addBank() {
-    this.router.navigate(['/banks/new']);
-  }
-
   editBank(id) {
     this.router.navigate(['/banks', id]);
   }

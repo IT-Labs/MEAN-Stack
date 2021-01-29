@@ -11,6 +11,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { SvgIconsModule } from '@ngneat/svg-icon';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CompanyAccountsModal } from './company-accounts-modal/company-accounts-modal';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 const DECLARATIONS = [
   CompaniesComponent,
@@ -29,6 +30,7 @@ const MODULES = [
   KitchenSinkModule,
   ModalModule.forRoot(),
   SvgIconsModule.forRoot(),
+  PopoverModule,
 ];
 
 const PROVIDERS = [];

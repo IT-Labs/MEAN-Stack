@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { SvgIconsModule } from '@ngneat/svg-icon';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { KsAlertsComponent } from './alerts/ks-alerts.component';
@@ -23,6 +24,7 @@ const MODULES = [
   CommonModule,
   SvgIconsModule.forRoot(),
   TooltipModule.forRoot(),
+  RouterModule,
 ];
 
 const PROVIDERS = [];

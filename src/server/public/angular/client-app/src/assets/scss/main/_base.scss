@@ -47,47 +47,6 @@ th {
   }
 }
 
-.popover {
-  $border-width: 5px;
-
-  border-radius: 0;
-
-  &.top-right {
-    left: auto !important;
-    top: auto !important;
-    right: -($border-width);
-    bottom: 100%;
-    margin-bottom: 10px;
-    min-width: 170px;
-    border-radius: 0;
-
-    > .arrow {
-      border-width: 16px;
-      right: -($border-width) !important;
-      border-bottom: 0;
-
-      &:after {
-        border-width: 8px !important;
-        bottom: 0;
-        margin-left: -9px;
-      }
-    }
-  }
-
-  &.bottom {
-    > .arrow {
-      margin-top: -($border-width);
-      border-width: 16px;
-      top: -27px !important;
-
-      &:after {
-        border-width: 10px !important;
-        top: -4px !important;
-      }
-    }
-  }
-}
-
 .table__actions {
   & svg-icon {
     cursor: pointer;

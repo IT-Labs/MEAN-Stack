@@ -8,6 +8,8 @@ import { SecureLayoutComponent } from './secure-layout/secure-layout.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { KitchenSinkModule } from '../kitchen-sink/kitchen-sink.module';
 import { CommonModule } from '@angular/common';
+import { ProfileDropdownComponent } from './profile-dropdown/profile-dropdown.component';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 const DECLARATIONS = [
   SecureLayoutComponent,
@@ -15,9 +17,16 @@ const DECLARATIONS = [
   FooterComponent,
   MainComponent,
   SidebarComponent,
+  ProfileDropdownComponent,
 ];
 
-const MODULES = [CommonModule, RouterModule, KitchenSinkModule, SvgIconsModule.forRoot()];
+const MODULES = [
+  CommonModule,
+  RouterModule,
+  KitchenSinkModule,
+  PopoverModule,
+  SvgIconsModule.forRoot(),
+];
 
 const PROVIDERS = [];
 
