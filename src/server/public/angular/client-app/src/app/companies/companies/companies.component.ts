@@ -11,8 +11,6 @@ import { AlertsEnum } from '../../shared/alerts.enum';
   templateUrl: './companies.component.html',
 })
 export class CompaniesComponent implements OnInit {
-  @ViewChild('search') search: ElementRef;
-
   companies: CompanyModel[] = [];
   items: any = [];
   total: number = 0;
@@ -89,10 +87,9 @@ export class CompaniesComponent implements OnInit {
   }
 
   onSearch(): void {
-    let term = '';
-    if (this.search.nativeElement[0].value) {
-      term = this.search.nativeElement[0].value;
-    }
+    let term;
+    Object.values(this.formGroup.value).find(item => (term = item));
+
     this.items = this.companies.filter(tag => {
       if (tag.name) return tag.name.indexOf(term) >= 0;
       else return false;

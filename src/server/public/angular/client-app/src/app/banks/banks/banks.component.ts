@@ -14,11 +14,9 @@ export class BanksComponent implements OnInit {
   items: any = [];
   total: number = 0;
   loading: boolean = false;
-  keyword: string = '';
-  searchTerm: string = '';
   tableHeadItems = ['Id', 'Name', 'SwiftCode', 'Actions'];
   formGroup: FormGroup = new FormGroup({
-    searchCompanies: new FormControl(''),
+    searchBanks: new FormControl(''),
   });
 
   constructor(private bankService: BankService, private router: Router) {}
@@ -68,7 +66,9 @@ export class BanksComponent implements OnInit {
   }
 
   onSearch(): void {
-    let term = this.searchTerm;
+    let term;
+    Object.values(this.formGroup.value).find(item => (term = item));
+
     this.items = this.banks.filter(tag => {
       if (tag.name) return tag.name.indexOf(term) >= 0;
       else return false;

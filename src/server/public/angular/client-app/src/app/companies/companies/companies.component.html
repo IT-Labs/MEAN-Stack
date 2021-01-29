@@ -4,8 +4,9 @@
   </div>
   <div class="row mb-5">
     <div class="col-sm-4">
-      <form #search [formGroup]="formGroup" (ngSubmit)="onSearch()">
+      <form [formGroup]="formGroup" (ngSubmit)="onSearch()">
         <ks-input
+          [formControl]="formGroup.get('searchCompanies')"
           [type]="'text'"
           [name]="'searchTerm'"
           [id]="'searchTerm'"
