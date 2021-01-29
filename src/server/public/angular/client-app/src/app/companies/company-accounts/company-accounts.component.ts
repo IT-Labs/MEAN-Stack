@@ -1,20 +1,19 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { BankModel } from '../../models/bank-model';
 import { CompanyService } from '../../services/company.service';
 import { BankService } from '../../services/bank.service';
 import { CompanyModel, AccountModel } from '../../models/company-model';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { AlertsEnum } from '../../shared/alerts.enum';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-company-accounts',
   templateUrl: './company-accounts.component.html',
 })
-export class CompanyAccountsComponent implements OnInit {
+export class CompanyAccountsComponent implements OnInit, OnDestroy {
   items: any = [];
   companyId: string;
   errorMessage: any;
@@ -22,33 +21,26 @@ export class CompanyAccountsComponent implements OnInit {
   accounts: AccountModel[];
   total: number = 0;
   banks: BankModel[];
-  form: FormGroup;
   subscription = new Subscription();
   AlertsEnum = AlertsEnum;
   tableHeadItems = ['Id', 'Name', 'SwiftCode', 'Actions'];
   modalTitle: string = 'Delete Account';
   modalBody: string;
   bankAcc: BankModel;
-  @ViewChild('modal') modal;
 
   constructor(
     private companyService: CompanyService,
     private avRoute: ActivatedRoute,
     private router: Router,
     private bankService: BankService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private toastr: ToastrService
   ) {
     const idParam = 'id';
 
     if (this.avRoute.snapshot.params[idParam]) {
       this.companyId = this.avRoute.snapshot.params[idParam];
     }
-
-    this.form = new FormGroup({
-      bankId: new FormControl('', Validators.required),
-      accountNumber: new FormControl('', Validators.required),
-      currency: new FormControl('', Validators.required),
-    });
   }
 
   ngOnInit() {
@@ -61,73 +53,57 @@ export class CompanyAccountsComponent implements OnInit {
   }
 
   getCompanyDetails() {
-    this.companyService.getById(this.companyId).subscribe(
-      (data: CompanyModel) => {
-        this.company = data as CompanyModel;
-        this.accounts = this.company.companyBanks || [];
-        this.total = this.accounts.length;
-      },
-      (err: HttpErrorResponse) => {
-        console.log(err.message);
-      }
+    this.subscription.add(
+      this.companyService.getById(this.companyId).subscribe(
+        (data: CompanyModel) => {
+          this.company = data as CompanyModel;
+          this.accounts = this.company.companyBanks || [];
+          this.total = this.accounts.length;
+        },
+        () => this.toastr.error('Error getting company info.')
+      )
     );
   }
 
   getBanks() {
-    this.bankService.getAll().subscribe(
-      (res: BankModel[]) => {
-        this.banks = res;
-      },
-      (err: HttpErrorResponse) => {}
+    this.subscription.add(
+      this.bankService.getAll().subscribe(
+        (res: BankModel[]) => (this.banks = res),
+        () => this.toastr.error('Error getting banks info.')
+      )
     );
   }
 
   addAccount(account) {
-    this.companyService.companyBankInsert(this.companyId, account).subscribe(
-      () => {
-        this.getCompanyDetails();
-      },
-      (err: HttpErrorResponse) => {}
+    this.subscription.add(
+      this.companyService.companyBankInsert(this.companyId, account).subscribe(
+        () => this.getCompanyDetails(),
+        () => this.toastr.error('Error with adding the account.')
+      )
     );
   }
 
-  deleteAction(account: string) {
-    this.bankAcc = this.accounts.find(item => item._id === account);
-    this.modalService.show(this.modal);
+  deleteAction(accountId: string, modal) {
+    this.bankAcc = this.accounts.find(item => item._id === accountId);
+    this.modalService.show(modal);
     this.modalBody = `Are you sure that you want to delete ${this.bankAcc.name} account?`;
   }
 
-  deleteAccount() {
+  deleteItem() {
     this.modalService.hide();
-    this.accounts.find(item => item._id === this.bankAcc.name);
-    this.companyService.companyBankDelete(this.companyId, this.bankAcc._id).subscribe(
-      () => {
-        this.getCompanyDetails();
-      },
-      (err: HttpErrorResponse) => {}
+    this.subscription.add(
+      this.companyService.companyBankDelete(this.companyId, this.bankAcc._id).subscribe(
+        () => this.getCompanyDetails(),
+        () => this.toastr.error('Error with deleting the account.')
+      )
     );
-  }
-
-  get f() {
-    return this.form.controls;
-  }
-
-  submit() {
-    let bank = this.form.value['bankId'];
-    let accountModel = new AccountModel();
-    accountModel._id = bank._id;
-    accountModel.name = bank.name;
-  }
-
-  onChange(e) {
-    console.log(e.target.value);
-  }
-
-  cancel() {
-    this.router.navigate(['/companies']);
   }
 
   closeModal() {
     this.modalService.hide();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

@@ -39,7 +39,7 @@
         [hasEdit]="true"
         [hasDelete]="true"
         (editItem)="editBank($event)"
-        (deleteItem)="deleteBank($event)"
+        (deleteItem)="deleteBank($event, modal)"
       ></ks-table>
       <p class="text-right">
         Total results <strong>{{ total }}</strong>
@@ -47,3 +47,14 @@
     </div>
   </div>
 </div>
+
+<ng-template #modal>
+  <ks-modal
+    [modalTitle]="modalTitle"
+    [modalBody]="modalBody"
+    [declineMsg]="'Cancel'"
+    [confirmMsg]="'Delete'"
+    (confirm)="deleteItem()"
+    (decline)="closeModal()"
+  ></ks-modal>
+</ng-template>

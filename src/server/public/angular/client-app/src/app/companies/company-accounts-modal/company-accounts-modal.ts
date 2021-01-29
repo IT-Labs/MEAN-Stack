@@ -1,5 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { BankModel } from '../../models/bank-model';
@@ -9,7 +8,7 @@ import { BankService } from '../../services/bank.service';
   selector: 'company-accounts-modal',
   templateUrl: './company-accounts-modal.html',
 })
-export class CompanyAccountsModal {
+export class CompanyAccountsModal implements OnInit, OnDestroy {
   items: any = [];
   banks: BankModel[] = [];
   tableHeadItems = ['Id', 'Name', 'SwiftCode', 'Actions'];
@@ -29,9 +28,7 @@ export class CompanyAccountsModal {
             else return false;
           });
         },
-        (err: HttpErrorResponse) => {
-          this.toastr.error(`Error with adding a new company.`);
-        }
+        () => this.toastr.error('Error with adding a new company.')
       )
     );
   }

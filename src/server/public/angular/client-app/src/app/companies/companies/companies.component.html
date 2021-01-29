@@ -24,7 +24,7 @@
         [name]="'addCompany'"
         [class]="'btn btn-secondary-green'"
         [value]="'+ Add Company'"
-        (click)="addCompany()"
+        [routerLink]="['/companies/new']"
       >
       </ks-button>
     </div>
@@ -39,7 +39,7 @@
         [hasDelete]="true"
         (companyAccounts)="companyAccounts($event)"
         (editItem)="editCompany($event)"
-        (deleteItem)="deleteCompany($event)"
+        (deleteItem)="deleteCompany($event, modal)"
       ></ks-table>
       <p class="text-right">
         Total results <strong>{{ total }}</strong>
@@ -52,3 +52,14 @@
     [role]="AlertsEnum.warning"
   ></ks-alerts>
 </div>
+
+<ng-template #modal>
+  <ks-modal
+    [modalTitle]="modalTitle"
+    [modalBody]="modalBody"
+    [declineMsg]="'Cancel'"
+    [confirmMsg]="'Delete'"
+    (confirm)="deleteItem()"
+    (decline)="closeModal()"
+  ></ks-modal>
+</ng-template>

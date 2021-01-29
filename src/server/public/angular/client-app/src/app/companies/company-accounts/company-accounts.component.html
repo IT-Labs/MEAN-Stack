@@ -22,7 +22,7 @@
         [tableHeadItems]="tableHeadItems"
         [isBank]="true"
         [hasDelete]="true"
-        (deleteItem)="deleteAction($event)"
+        (deleteItem)="deleteAction($event, modal)"
       ></ks-table>
       <p class="text-right" *ngIf="total">
         Total results <strong>{{ total }}</strong>
@@ -56,7 +56,7 @@
     [modalBody]="modalBody"
     [declineMsg]="'Cancel'"
     [confirmMsg]="'Delete'"
-    (confirm)="deleteAccount()"
+    (confirm)="deleteItem()"
     (decline)="closeModal()"
   ></ks-modal>
 </ng-template>

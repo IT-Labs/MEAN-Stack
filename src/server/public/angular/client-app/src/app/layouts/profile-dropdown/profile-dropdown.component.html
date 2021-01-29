@@ -4,5 +4,7 @@
 </div>
 <div class="profile-dropdown__item">
   <svg-icon key="out" size="md"></svg-icon>
-  <a href="#" (click)="$event.preventDefault(); logOut()" class="profile-dropdown__link">Log out</a>
+  <a href="#" (click)="$event.preventDefault()" [routerLink]="['/']" class="profile-dropdown__link"
+    >Log out</a
+  >
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -13,7 +13,7 @@ import { ActionType } from '../../models/action-type-model';
   selector: 'app-company',
   templateUrl: './company.component.html',
 })
-export class CompanyComponent implements OnInit {
+export class CompanyComponent implements OnInit, OnDestroy {
   form: FormGroup;
   actionType: string;
   companyId: string;
@@ -63,7 +63,7 @@ export class CompanyComponent implements OnInit {
             this.form.controls['state'].setValue(this.company.state);
             this.form.controls['country'].setValue(this.company.country);
           },
-          () => this.toastr.error(`Error getting company info.`)
+          () => this.toastr.error('Error getting company info')
         )
       );
     }
@@ -74,19 +74,16 @@ export class CompanyComponent implements OnInit {
     if (!this.form.valid) {
       return;
     }
-
     let companyModel = this.form.value;
 
     if (this.actionType === ActionType.add) {
       delete this.form.value.id;
       this.subscription.add(
         this.companyService.insert(companyModel).subscribe(
-          data => {
-            this.router.navigate(['/companies', data]);
-          },
+          () => this.router.navigate(['/companies']),
           (err: HttpErrorResponse) => {
-            logLevel.debug('Error with adding a new company.', err.message);
-            this.toastr.error(`Error with adding a new company.`);
+            logLevel.debug('Error with saving a new company.', err.message);
+            this.toastr.error('Error with saving a new company.');
           }
         )
       );
@@ -96,24 +93,14 @@ export class CompanyComponent implements OnInit {
       delete this.form.value.id;
       this.subscription.add(
         this.companyService.update(this.companyId, companyModel).subscribe(
-          data => {
-            this.router.navigate(['/companies']);
-          },
+          () => this.router.navigate(['/companies']),
           (err: HttpErrorResponse) => {
-            logLevel.debug('Error with editing a company.', err.message);
-            this.toastr.error(`Error with editing a company.`);
+            logLevel.debug('Error with updating the company.', err.message);
+            this.toastr.error('Error with updating the company.');
           }
         )
       );
     }
-  }
-
-  cancel() {
-    this.router.navigate(['/companies']);
-  }
-
-  goBack() {
-    this.router.navigate(['/companies']);
   }
 
   ngOnDestroy() {

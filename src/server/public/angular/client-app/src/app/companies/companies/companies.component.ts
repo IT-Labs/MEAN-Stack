@@ -1,21 +1,27 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CompanyService } from 'src/app/services/company.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { CompanyModel } from 'src/app/models/company-model';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AlertsEnum } from '../../shared/alerts.enum';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-companies',
   templateUrl: './companies.component.html',
 })
-export class CompaniesComponent implements OnInit {
+export class CompaniesComponent implements OnInit, OnDestroy {
   companies: CompanyModel[] = [];
   items: any = [];
   total: number = 0;
   loading: boolean = false;
   keyword: string = '';
+  modalTitle: string = 'Delete Account';
+  modalBody: string;
+  company: CompanyModel;
+  subscription = new Subscription();
   formGroup: FormGroup = new FormGroup({
     searchCompanies: new FormControl(''),
   });
@@ -33,7 +39,12 @@ export class CompaniesComponent implements OnInit {
     'Actions',
   ];
 
-  constructor(private companyService: CompanyService, private router: Router) {}
+  constructor(
+    private companyService: CompanyService,
+    private router: Router,
+    private modalService: BsModalService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.getCompanies();
@@ -42,21 +53,17 @@ export class CompaniesComponent implements OnInit {
   getCompanies() {
     this.loading = true;
 
-    this.companyService.getAll().subscribe(
-      (res: CompanyModel[]) => {
-        this.companies = res;
-        this.total = this.companies.length;
-        this.loading = false;
-        this.onSearch();
-      },
-      (err: HttpErrorResponse) => {
-        this.loading = false;
-      }
+    this.subscription.add(
+      this.companyService.getAll().subscribe(
+        (res: CompanyModel[]) => {
+          this.companies = res;
+          this.total = this.companies.length;
+          this.loading = false;
+          this.onSearch();
+        },
+        () => this.toastr.error('Error getting companies info.')
+      )
     );
-  }
-
-  addCompany() {
-    this.router.navigate(['/companies/new']);
   }
 
   editCompany(id) {
@@ -67,33 +74,39 @@ export class CompaniesComponent implements OnInit {
     this.router.navigate(['/company/' + id + '/accounts']);
   }
 
-  deleteCompany(id) {
-    let company = this.companies.find(item => item._id === id);
+  deleteCompany(id, template) {
+    this.company = this.companies.find(item => item._id === id);
 
-    if (confirm('Are you sure to delete company ' + company.name + ' ?')) {
-      this.companyService.delete(id).subscribe(
-        (data: CompanyModel) => {
-          let list = this.companies.filter(item => item._id !== id);
-          this.companies = list;
-          this.total = this.companies.length;
-          this.loading = false;
-          this.onSearch();
-        },
-        (err: HttpErrorResponse) => {
-          this.loading = false;
-        }
-      );
-    }
+    this.modalBody = `Are you sure that you want to delete ${this.company.name} account?`;
+    this.modalService.show(template);
+  }
+
+  deleteItem() {
+    this.modalService.hide();
+    this.subscription.add(
+      this.companyService.delete(this.company._id).subscribe(
+        () => this.getCompanies(),
+        () => this.toastr.error('Error deleting company info.')
+      )
+    );
+  }
+
+  closeModal() {
+    this.modalService.hide();
   }
 
   onSearch(): void {
-    let term;
-    Object.values(this.formGroup.value).find(item => (term = item));
+    let term: string = '';
+    term = this.formGroup.value.searchCompanies;
 
     this.items = this.companies.filter(tag => {
       if (tag.name) return tag.name.indexOf(term) >= 0;
       else return false;
     });
     this.total = this.items.length;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

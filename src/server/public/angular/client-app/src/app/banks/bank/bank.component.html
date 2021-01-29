@@ -21,14 +21,14 @@
         <div class="row">
           <div class="col-sm-4 company__item">
             <label class="control-label">Name</label>
-            <input class="form-control" type="text" formControlName="name" />
+            <input class="form-control" type="text" [formControl]="form.get('name')" />
             <span class="text-danger" *ngIf="isSubmited && !form.value.name">
               Name is required.
             </span>
           </div>
           <div class="col-sm-4 company__item">
             <label class="control-label">Swift Code</label>
-            <input class="form-control" type="text" formControlName="swiftCode" />
+            <input class="form-control" type="text" [formControl]="form.get('swiftCode')" />
             <span class="text-danger" *ngIf="isSubmited && !form.value.swiftCode">
               Swift Code is required.
             </span>
