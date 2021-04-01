@@ -61,7 +61,10 @@ export class CompaniesComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.onSearch();
         },
-        () => this.toastr.error('Error getting companies info.')
+        () => {
+          this.toastr.error('Error getting companies info.');
+          this.loading = false;
+        }
       )
     );
   }

@@ -6,6 +6,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { AlertsEnum } from '../../shared/alerts.enum';
 
 @Component({
   selector: 'app-banks',
@@ -24,6 +25,7 @@ export class BanksComponent implements OnInit, OnDestroy {
   formGroup: FormGroup = new FormGroup({
     searchBanks: new FormControl(''),
   });
+  AlertsEnum = AlertsEnum;
 
   constructor(
     private bankService: BankService,
@@ -47,7 +49,10 @@ export class BanksComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.onSearch();
         },
-        () => this.toastr.error('Error getting banks info.')
+        () => {
+          this.toastr.error('Error getting banks info.');
+          this.loading = false;
+        }
       )
     );
   }
@@ -80,7 +85,6 @@ export class BanksComponent implements OnInit, OnDestroy {
   onSearch(): void {
     let term: string = '';
     term = this.formGroup.value.searchBanks;
-
     this.items = this.banks.filter(tag => {
       if (tag.name) return tag.name.indexOf(term) >= 0;
       else return false;

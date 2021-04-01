@@ -2,7 +2,6 @@
   <div class="row">
     <h2 class="col-sm-12 mt-4 mb-4">Banks</h2>
   </div>
-
   <div class="row mb-5">
     <div class="col-sm-4">
       <form [formGroup]="formGroup" (ngSubmit)="onSearch()">
@@ -46,8 +45,12 @@
       </p>
     </div>
   </div>
+  <ks-alerts
+    *ngIf="!total && !loading"
+    [content]="'No results found.'"
+    [role]="AlertsEnum.warning"
+  ></ks-alerts>
 </div>
-
 <ng-template #modal>
   <ks-modal
     [modalTitle]="modalTitle"
