@@ -13,6 +13,8 @@ import { LoginModule } from './auth/login.module';
 import { SvgIconsModule } from '@ngneat/svg-icon';
 import icons from '../assets/svg/svg-icons';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxsModule } from '@ngxs/store';
+import { CompanyState } from './companies/state/comapnies-state';
 
 const DECLARATIONS = [AppComponent, AppComponent];
 
@@ -36,6 +38,7 @@ const MODULES = [
     },
     icons,
   }),
+  NgxsModule.forRoot([CompanyState]),
 ];
 
 const PROVIDERS = [];

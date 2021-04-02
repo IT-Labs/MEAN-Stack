@@ -1,13 +1,14 @@
 export interface CompanyModel {
   address: string;
   city: string;
-  country: number;
   companyBanks?: AccountModel[];
-  _id: string;
+  country: string;
+  created: string;
   name: string;
   state: number;
   taxNumber: string;
   zipCode: number;
+  _id: string;
 }
 
 export class AccountModel {

@@ -5,16 +5,20 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AlertsEnum } from '../../shared/alerts.enum';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { Select, Store } from '@ngxs/store';
+import { CompanyState } from '../state/comapnies-state';
+import { AllCompaniesAction } from '../state/companies-actions';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-companies',
   templateUrl: './companies.component.html',
 })
 export class CompaniesComponent implements OnInit, OnDestroy {
+  @Select(CompanyState.companiesSelector) companies$: Observable<any>;
   companies: CompanyModel[] = [];
-  items: any = [];
   total: number = 0;
   loading: boolean = false;
   keyword: string = '';
@@ -43,7 +47,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     private companyService: CompanyService,
     private router: Router,
     private modalService: BsModalService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private store: Store
   ) {}
 
   ngOnInit() {
@@ -51,19 +56,10 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
 
   getCompanies() {
+    debugger;
     this.loading = true;
-
-    this.subscription.add(
-      this.companyService.getAll().subscribe(
-        (res: CompanyModel[]) => {
-          this.companies = res;
-          this.total = this.companies.length;
-          this.loading = false;
-          this.onSearch();
-        },
-        () => this.toastr.error('Error getting companies info.')
-      )
-    );
+    this.store.dispatch(new AllCompaniesAction());
+    this.onSearch();
   }
 
   editCompany(id) {
@@ -98,12 +94,18 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   onSearch(): void {
     let term: string = '';
     term = this.formGroup.value.searchCompanies;
-
-    this.items = this.companies.filter(tag => {
-      if (tag.name) return tag.name.indexOf(term) >= 0;
-      else return false;
-    });
-    this.total = this.items.length;
+    this.companies$.subscribe(
+      res => {
+        console.log(this.loading);
+        this.companies = res.filter(tag => {
+          if (tag.name) return tag.name.indexOf(term) >= 0;
+          else return false;
+        });
+        this.total = this.companies.length;
+        this.loading = false;
+      },
+      () => this.toastr.error('Error getting companies info.')
+    );
   }
 
   ngOnDestroy() {
