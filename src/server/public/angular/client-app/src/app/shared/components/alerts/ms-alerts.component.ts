@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'ks-alerts',
+  selector: 'ms-alerts',
   template: `
-    <div class="ks-alerts__container__{{ role }}">
+    <div class="ms-alerts__container__{{ role }}">
       {{ content }}
     </div>
   `,
 })
-export class KsAlertsComponent {
+export class MsAlertsComponent {
   @Input() content: string;
   @Input() role: string;
 }

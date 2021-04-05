@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SvgIconsModule } from '@ngneat/svg-icon';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { KsAlertsComponent } from './alerts/ks-alerts.component';
-import { KsButtonComponent } from './buttons/ks-button.component';
-import { KsInputComponent } from './inputs/ks-input.component';
-import { KsModal } from './modal/ks-modal.component';
-import { KsTableComponent } from './tables/ks-table.component';
+import { MsAlertsComponent } from './alerts/ms-alerts.component';
+import { MsButtonComponent } from './buttons/ms-button.component';
+import { MsInputComponent } from './inputs/ms-input.component';
+import { MsModal } from './modal/ms-modal.component';
+import { MsTableComponent } from './tables/ms-table.component';
 
 const DECLARATIONS = [
-  KsInputComponent,
-  KsButtonComponent,
-  KsAlertsComponent,
-  KsTableComponent,
-  KsModal,
+  MsInputComponent,
+  MsButtonComponent,
+  MsAlertsComponent,
+  MsTableComponent,
+  MsModal,
 ];
 
 const MODULES = [
@@ -35,4 +35,4 @@ const PROVIDERS = [];
   exports: [...DECLARATIONS],
   providers: [...PROVIDERS],
 })
-export class KitchenSinkModule {}
+export class SharedModule {}

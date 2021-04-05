@@ -7,38 +7,38 @@
       <h4>Accounts</h4>
     </div>
     <div class="col-sm-8 text-right">
-      <ks-button
+      <ms-button
         [type]="'button'"
         [class]="'btn btn-gray'"
         [value]="'Back'"
         [routerLink]="['/companies']"
-      ></ks-button>
+      ></ms-button>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <ks-table
+      <ms-table
         [items]="accounts"
         [tableHeadItems]="tableHeadItems"
         [isBank]="true"
         [hasDelete]="true"
         (deleteItem)="deleteAction($event, modal)"
-      ></ks-table>
+      ></ms-table>
       <p class="text-right" *ngIf="total">
         Total results <strong>{{ total }}</strong>
       </p>
     </div>
   </div>
-  <ks-alerts *ngIf="!total" [content]="'No results found.'" [role]="AlertsEnum.warning"></ks-alerts>
+  <ms-alerts *ngIf="!total" [content]="'No results found.'" [role]="AlertsEnum.warning"></ms-alerts>
 
   <div class="row">
     <div class="col-sm-12 text-right mb-5">
-      <ks-button
+      <ms-button
         [type]="'button'"
         [class]="'btn btn-secondary-green ml-2'"
         [value]="'+ Add Account'"
         (click)="openModal(modalContent)"
-      ></ks-button>
+      ></ms-button>
     </div>
   </div>
 </div>
@@ -51,12 +51,12 @@
 </ng-template>
 
 <ng-template #modal>
-  <ks-modal
+  <ms-modal
     [modalTitle]="modalTitle"
     [modalBody]="modalBody"
     [declineMsg]="'Cancel'"
     [confirmMsg]="'Delete'"
     (confirm)="deleteItem()"
     (decline)="closeModal()"
-  ></ks-modal>
+  ></ms-modal>
 </ng-template>

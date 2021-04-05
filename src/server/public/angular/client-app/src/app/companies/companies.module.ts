@@ -6,7 +6,7 @@ import { CompaniesComponent } from './companies/companies.component';
 import { CompanyComponent } from './company/company.component';
 import { CompanyAccountsComponent } from './company-accounts/company-accounts.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { KitchenSinkModule } from '../kitchen-sink/kitchen-sink.module';
+import { SharedModule } from '../shared/components/shared.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { SvgIconsModule } from '@ngneat/svg-icon';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -27,7 +27,7 @@ const MODULES = [
   HttpClientModule,
   FormsModule,
   TooltipModule.forRoot(),
-  KitchenSinkModule,
+  SharedModule,
   ModalModule.forRoot(),
   SvgIconsModule.forRoot(),
   PopoverModule,

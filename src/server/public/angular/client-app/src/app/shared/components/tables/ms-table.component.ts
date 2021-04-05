@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'ks-table',
-  templateUrl: './ks-table.component.html',
+  selector: 'ms-table',
+  templateUrl: './ms-table.component.html',
 })
-export class KsTableComponent {
+export class MsTableComponent {
   @Input() items: any;
   @Input() tableHeadItems: string[];
   @Input() isBank: boolean = false;

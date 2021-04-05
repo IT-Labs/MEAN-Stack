@@ -2,17 +2,17 @@ import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'ks-input',
-  templateUrl: './ks-input.component.html',
+  selector: 'ms-input',
+  templateUrl: './ms-input.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef(() => KsInputComponent),
+      useExisting: forwardRef(() => MsInputComponent),
     },
   ],
 })
-export class KsInputComponent implements ControlValueAccessor {
+export class MsInputComponent implements ControlValueAccessor {
   @Input() type: string;
   @Input() name: string;
   @Input() id: string;

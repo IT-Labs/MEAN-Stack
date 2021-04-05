@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'ks-button',
+  selector: 'ms-button',
   template: `
     <button
       type="{{ type }}"
@@ -14,7 +14,7 @@ import { Component, Input } from '@angular/core';
     </button>
   `,
 })
-export class KsButtonComponent {
+export class MsButtonComponent {
   @Input() type: string;
   @Input() name: string;
   @Input() value: string;

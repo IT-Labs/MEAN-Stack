@@ -7,12 +7,12 @@
       <h4>{{ actionType === 'Add' ? 'Add Bank' : 'Edit Bank' }}</h4>
     </div>
     <div class="col-sm-8 text-right">
-      <ks-button
+      <ms-button
         [type]="'button'"
         [class]="'btn btn-gray'"
         [value]="'Back'"
         [routerLink]="['/banks']"
-      ></ks-button>
+      ></ms-button>
     </div>
   </div>
   <div class="row">
@@ -35,17 +35,17 @@
           </div>
         </div>
         <div class="text-right mb-5">
-          <ks-button
+          <ms-button
             [type]="'button'"
             [class]="'btn btn-gray'"
             [value]="'Cancel'"
             [routerLink]="['/banks']"
-          ></ks-button>
-          <ks-button
+          ></ms-button>
+          <ms-button
             [type]="'submit'"
             [class]="'btn btn-secondary-green ml-2'"
             [value]="'Save'"
-          ></ks-button>
+          ></ms-button>
         </div>
       </form>
     </div>

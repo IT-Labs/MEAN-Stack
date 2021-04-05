@@ -8,34 +8,34 @@
           </div>
           <div class="form-group login__input mt-5">
             <svg-icon key="avatar" color="#45a49e" size="md"></svg-icon>
-            <ks-input
+            <ms-input
               [formControl]="loginForm.get('username')"
               [type]="'text'"
               [name]="'username'"
               [id]="'username'"
               [placeholder]="'Username'"
-            ></ks-input>
+            ></ms-input>
           </div>
           <div class="form-group login__input">
             <svg-icon key="password" color="#45a49e" size="md"></svg-icon>
-            <ks-input
+            <ms-input
               [formControl]="loginForm.get('password')"
               [type]="'password'"
               [name]="'password'"
               [id]="'password'"
               [placeholder]="'Password'"
-            ></ks-input>
+            ></ms-input>
           </div>
           <div class="form-group">
             <input id="login__checkbox" name="remember-me" type="checkbox" />
             <label for="remember-me" class="login__remember-me">Remember me</label>
-            <ks-button
+            <ms-button
               [type]="'submit'"
               [name]="'submit'"
               [class]="'login__btn btn btn-outline-light'"
               [value]="'Login'"
             >
-            </ks-button>
+            </ms-button>
           </div>
         </form>
       </div>

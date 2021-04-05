@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BanksComponent } from './banks/banks.component';
 import { BankComponent } from './bank/bank.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { KitchenSinkModule } from '../kitchen-sink/kitchen-sink.module';
+import { SharedModule } from '../shared/components/shared.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { SvgIconsModule } from '@ngneat/svg-icon';
 import { RouterModule } from '@angular/router';
@@ -19,7 +19,7 @@ const MODULES = [
   HttpClientModule,
   FormsModule,
   TooltipModule.forRoot(),
-  KitchenSinkModule,
+  SharedModule,
   SvgIconsModule.forRoot(),
   RouterModule,
 ];

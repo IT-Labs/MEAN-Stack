@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SvgIconsModule } from '@ngneat/svg-icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { KitchenSinkModule } from '../kitchen-sink/kitchen-sink.module';
+import { SharedModule } from '../shared/components/shared.module';
 import { LoginComponent } from './login.component';
 
 const DECLARATIONS = [LoginComponent];
@@ -18,7 +18,7 @@ const MODULES = [
   FormsModule,
   TooltipModule.forRoot(),
   SvgIconsModule.forRoot(),
-  KitchenSinkModule,
+  SharedModule,
 ];
 
 const PROVIDERS = [];

@@ -5,33 +5,33 @@
   <div class="row mb-5">
     <div class="col-sm-4">
       <form [formGroup]="formGroup" (ngSubmit)="onSearch()">
-        <ks-input
+        <ms-input
           [formControl]="formGroup.get('searchBanks')"
           [type]="'text'"
           [name]="'searchTerm'"
           [id]="'searchTerm'"
           [placeholder]="'Search banks'"
           class="banks__search__input"
-        ></ks-input>
+        ></ms-input>
         <button type="submit" class="search__btn">
           <svg-icon key="magnifying" size="sm" color="#fff"></svg-icon>
         </button>
       </form>
     </div>
     <div class="col-sm-8 text-right">
-      <ks-button
+      <ms-button
         [type]="'button'"
         [name]="'addBank'"
         [class]="'btn btn-secondary-green'"
         [value]="'+ Add bank'"
         [routerLink]="['/banks/new']"
       >
-      </ks-button>
+      </ms-button>
     </div>
   </div>
   <div class="row">
     <div [hidden]="loading" class="col-lg-12 banks__table">
-      <ks-table
+      <ms-table
         [items]="items"
         [tableHeadItems]="tableHeadItems"
         [isBank]="true"
@@ -39,25 +39,25 @@
         [hasDelete]="true"
         (editItem)="editBank($event)"
         (deleteItem)="deleteBank($event, modal)"
-      ></ks-table>
+      ></ms-table>
       <p class="text-right">
         Total results <strong>{{ total }}</strong>
       </p>
     </div>
   </div>
-  <ks-alerts
+  <ms-alerts
     *ngIf="!total && !loading"
     [content]="'No results found.'"
     [role]="AlertsEnum.warning"
-  ></ks-alerts>
+  ></ms-alerts>
 </div>
 <ng-template #modal>
-  <ks-modal
+  <ms-modal
     [modalTitle]="modalTitle"
     [modalBody]="modalBody"
     [declineMsg]="'Cancel'"
     [confirmMsg]="'Delete'"
     (confirm)="deleteItem()"
     (decline)="closeModal()"
-  ></ks-modal>
+  ></ms-modal>
 </ng-template>

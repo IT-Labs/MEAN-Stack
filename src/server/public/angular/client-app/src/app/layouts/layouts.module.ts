@@ -6,7 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { SecureLayoutComponent } from './secure-layout/secure-layout.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { KitchenSinkModule } from '../kitchen-sink/kitchen-sink.module';
+import { SharedModule } from '../shared/components/shared.module';
 import { CommonModule } from '@angular/common';
 import { ProfileDropdownComponent } from './profile-dropdown/profile-dropdown.component';
 import { PopoverModule } from 'ngx-bootstrap/popover';
@@ -20,13 +20,7 @@ const DECLARATIONS = [
   ProfileDropdownComponent,
 ];
 
-const MODULES = [
-  CommonModule,
-  RouterModule,
-  KitchenSinkModule,
-  PopoverModule,
-  SvgIconsModule.forRoot(),
-];
+const MODULES = [CommonModule, RouterModule, SharedModule, PopoverModule, SvgIconsModule.forRoot()];
 
 const PROVIDERS = [];
 

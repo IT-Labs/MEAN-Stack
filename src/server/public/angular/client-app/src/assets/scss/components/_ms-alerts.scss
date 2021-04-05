@@ -1,7 +1,7 @@
 @import '../main/mixins.scss';
 @import '../main/variables.scss';
 
-.ks-alerts {
+.ms-alerts {
   &__container {
     &__warning {
       @include alerts-container;

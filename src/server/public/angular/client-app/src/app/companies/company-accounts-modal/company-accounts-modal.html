@@ -5,13 +5,13 @@
   </button>
 </div>
 <div class="modal-body">
-  <ks-table
+  <ms-table
     [items]="items"
     [tableHeadItems]="tableHeadItems"
     [isBank]="true"
     [hasAdd]="true"
     (addAccount)="addAccount($event)"
-  ></ks-table>
+  ></ms-table>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-gray " (click)="close()">Close</button>
