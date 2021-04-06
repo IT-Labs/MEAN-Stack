@@ -11,5 +11,13 @@
       @include alerts-container;
       @include alerts-role($danger);
     }
+    &__info {
+      @include alerts-container;
+      @include alerts-role($info);
+    }
+    &__success {
+      @include alerts-container;
+      @include alerts-role($success);
+    }
   }
 }

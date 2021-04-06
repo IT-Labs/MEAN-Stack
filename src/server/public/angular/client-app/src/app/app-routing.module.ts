@@ -7,6 +7,7 @@ import { CompanyComponent } from './companies/company/company.component';
 import { BanksComponent } from './banks/banks/banks.component';
 import { BankComponent } from './banks/bank/bank.component';
 import { CompanyAccountsComponent } from './companies/company-accounts/company-accounts.component';
+import { KitchenSinkComponent } from './kitchen-sink/kitchen-sink.component';
 
 export const routes: Routes = [
   {
@@ -70,6 +71,13 @@ export const routes: Routes = [
         component: CompanyAccountsComponent,
         data: {
           title: 'Company',
+        },
+      },
+      {
+        path: 'kitchen-sink',
+        component: KitchenSinkComponent,
+        data: {
+          title: 'KitchenSink',
         },
       },
     ],

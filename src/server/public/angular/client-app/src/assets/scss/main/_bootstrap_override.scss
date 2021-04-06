@@ -26,13 +26,22 @@
     background-color: $secondary-color;
     border-color: $secondary-color;
   }
-  &.btn-secondary-green {
+  &.btn-success {
     background-color: $secondary-green;
     border-color: $secondary-green;
     color: $white;
     &:hover {
       background-color: darken($secondary-green, 10%);
       border-color: darken($secondary-green, 10%);
+    }
+  }
+  &.btn-danger {
+    background-color: $danger-red;
+    border-color: $danger-red;
+    color: $white;
+    &:hover {
+      background-color: darken($danger-red, 10%);
+      border-color: darken($danger-red, 10%);
     }
   }
   &.btn-gray {

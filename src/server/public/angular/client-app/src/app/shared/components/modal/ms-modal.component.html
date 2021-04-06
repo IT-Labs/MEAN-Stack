@@ -6,17 +6,13 @@
 </div>
 <div class="modal-body">
   {{ modalBody }}
+  <ng-content></ng-content>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-gray" *ngIf="declineMsg" (click)="decline.emit()">
     {{ declineMsg }}
   </button>
-  <button
-    type="button"
-    class="btn btn-secondary-green"
-    *ngIf="confirmMsg"
-    (click)="confirm.emit($event)"
-  >
+  <button type="button" class="btn btn-success" *ngIf="confirmMsg" (click)="confirm.emit($event)">
     {{ confirmMsg }}
   </button>
 </div>

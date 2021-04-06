@@ -1,0 +1,8 @@
+@import '../main/mixins.scss';
+@import '../main/variables.scss';
+
+.btn {
+  &.disabled:hover {
+    cursor: not-allowed;
+  }
+}

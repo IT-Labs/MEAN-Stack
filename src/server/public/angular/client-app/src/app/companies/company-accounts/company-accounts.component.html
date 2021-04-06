@@ -35,7 +35,7 @@
     <div class="col-sm-12 text-right mb-5">
       <ms-button
         [type]="'button'"
-        [class]="'btn btn-secondary-green ml-2'"
+        [class]="'btn btn-success ml-2'"
         [value]="'+ Add Account'"
         (click)="openModal(modalContent)"
       ></ms-button>
@@ -44,10 +44,15 @@
 </div>
 
 <ng-template #modalContent>
-  <company-accounts-modal
-    (account)="addAccount($event)"
-    (closeModal)="closeModal()"
-  ></company-accounts-modal>
+  <ms-modal [modalTitle]="'Add accounts'" [declineMsg]="'Close'" (decline)="closeModal()"
+    ><ms-table
+      [items]="banks"
+      [tableHeadItems]="tableHeadItems"
+      [isBank]="true"
+      [hasAdd]="true"
+      (addAccount)="addAccount($event)"
+    ></ms-table
+  ></ms-modal>
 </ng-template>
 
 <ng-template #modal>

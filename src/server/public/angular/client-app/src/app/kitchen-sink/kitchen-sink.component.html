@@ -1,0 +1,204 @@
+<div class="container-fluid">
+  <div class="row">
+    <h2 class="col-sm-12 mt-4 mb-4">Kitchen Sink</h2>
+  </div>
+  <div class="row mb-5">
+    <div class="col-sm-12 text-right">
+      <ms-button
+        [type]="'button'"
+        [class]="'btn btn-gray'"
+        [value]="'Back'"
+        [routerLink]="['/companies']"
+      ></ms-button>
+    </div>
+  </div>
+
+  <!-- BUTTONS -->
+  <h4 class="mb-4">Buttons</h4>
+  <div class="row text-center mb-4">
+    <div class="col-sm-3">
+      <ms-button
+        [type]="'button'"
+        [class]="'btn btn-primary'"
+        [value]="'Primary'"
+        [routerLink]="['#']"
+      ></ms-button>
+    </div>
+    <div class="col-sm-3">
+      <ms-button
+        [type]="'button'"
+        [class]="'btn btn-secondary'"
+        [value]="'Secondary'"
+        [routerLink]="['#']"
+      ></ms-button>
+    </div>
+    <div class="col-sm-3">
+      <ms-button
+        [type]="'button'"
+        [class]="'btn btn-success'"
+        [value]="'Success'"
+        [routerLink]="['#']"
+      ></ms-button>
+    </div>
+    <div class="col-sm-3">
+      <ms-button
+        [type]="'button'"
+        [class]="'btn btn-danger'"
+        [value]="'Danger'"
+        [routerLink]="['#']"
+      ></ms-button>
+    </div>
+  </div>
+  <div class="row text-center mb-4">
+    <div class="col-sm-3">
+      <ms-button
+        [type]="'button'"
+        [class]="'btn btn-gray'"
+        [value]="'Gray'"
+        [routerLink]="['#']"
+      ></ms-button>
+    </div>
+    <div class="col-sm-3">
+      <ms-button
+        [type]="'button'"
+        [class]="'btn btn-lg btn-primary'"
+        [value]="'Large button'"
+        [routerLink]="['#']"
+      ></ms-button>
+    </div>
+    <div class="col-sm-3">
+      <ms-button
+        [type]="'button'"
+        [class]="'btn btn-sm btn-primary'"
+        [value]="'Small button'"
+        [routerLink]="['#']"
+      ></ms-button>
+    </div>
+    <div class="col-sm-3">
+      <ms-button
+        [type]="'button'"
+        [class]="'btn btn-gray'"
+        [value]="'Disabled button'"
+        [routerLink]="['#']"
+        [disabled]="true"
+      ></ms-button>
+    </div>
+  </div>
+
+  <!-- INPUTS -->
+  <h4 class="mb-4">Inputs</h4>
+  <form [formGroup]="formGroup" class="mb-4">
+    <div class="row mb-4">
+      <div class="col-sm-4 company__item">
+        <label class="control-label">Input required</label>
+        <input class="form-control" type="text" [formControl]="formGroup.get('searchInput')" />
+        <span class="text-danger">
+          Name is required.
+        </span>
+      </div>
+      <div class="col-sm-4 company__item">
+        <label class="control-label">Input not required</label>
+        <input class="form-control" type="text" [formControl]="formGroup.get('searchInput')" />
+      </div>
+      <div class="col-sm-4 company__item">
+        <label class="control-label">Textarea</label>
+        <textarea
+          class="form-control"
+          type="text"
+          [formControl]="formGroup.get('searchInput')"
+        ></textarea>
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-sm-4">
+        <ms-input
+          [formControl]="formGroup.get('searchInput')"
+          [type]="'text'"
+          [name]="'searchTerm'"
+          [id]="'searchTerm'"
+          [placeholder]="'Search input'"
+          class="banks__search__input"
+        >
+        </ms-input>
+        <button type="submit" class="search__btn">
+          <svg-icon key="magnifying" size="sm" color="#fff"></svg-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- ALERTS -->
+  <h4 class="mb-4">Alerts</h4>
+  <div class="row text-center mb-4">
+    <div class="col-sm-12">
+      <ms-alerts [content]="'This is info alert.'" [role]="AlertsEnum.info"></ms-alerts>
+    </div>
+    <div class="col-sm-12">
+      <ms-alerts [content]="'This is warning alert.'" [role]="AlertsEnum.warning"></ms-alerts>
+    </div>
+    <div class="col-sm-12">
+      <ms-alerts [content]="'This is danger alert.'" [role]="AlertsEnum.danger"></ms-alerts>
+    </div>
+    <div class="col-sm-12">
+      <ms-alerts [content]="'This is success alert.'" [role]="AlertsEnum.success"></ms-alerts>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <h4 class="mb-4">Tables</h4>
+  <div class="row">
+    <div class="col-sm-12">
+      <ms-table
+        [items]="items"
+        [tableHeadItems]="tableHeadItems"
+        [hasEdit]="true"
+        [hasAccounts]="true"
+        [hasDelete]="true"
+        [isBank]="true"
+      ></ms-table>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  <h4 class="mb-4">Modals</h4>
+  <div class="row text-center mb-5">
+    <div class="col-sm-3">
+      <ms-button
+        [type]="'button'"
+        [class]="'btn btn-primary'"
+        [value]="'Simple Modal'"
+        (click)="openModal(modal)"
+      ></ms-button>
+    </div>
+    <div class="col-sm-3">
+      <ms-button
+        [type]="'button'"
+        [class]="'btn btn-secondary'"
+        [value]="'Modal with table data'"
+        (click)="openModal(tableModal)"
+      ></ms-button>
+    </div>
+  </div>
+</div>
+
+<ng-template #modal>
+  <ms-modal
+    [modalTitle]="modalTitle"
+    [modalBody]="modalBody"
+    [declineMsg]="'Close'"
+    (decline)="closeModal()"
+  ></ms-modal>
+</ng-template>
+
+<ng-template #tableModal>
+  <ms-modal [modalTitle]="'Modal with table'" [declineMsg]="'Close'" (decline)="closeModal()"
+    ><ms-table
+      [items]="items"
+      [tableHeadItems]="tableHeadItems"
+      [hasEdit]="true"
+      [hasAccounts]="true"
+      [hasDelete]="true"
+      [isBank]="true"
+    ></ms-table
+  ></ms-modal>
+</ng-template>

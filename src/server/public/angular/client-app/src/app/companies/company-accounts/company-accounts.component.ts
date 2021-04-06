@@ -75,12 +75,23 @@ export class CompanyAccountsComponent implements OnInit, OnDestroy {
   }
 
   addAccount(account) {
-    this.subscription.add(
-      this.companyService.companyBankInsert(this.companyId, account).subscribe(
-        () => this.getCompanyDetails(),
-        () => this.toastr.error('Error with adding the account.')
-      )
-    );
+    let accountExists: string;
+    this.accounts.forEach(item => {
+      if (item._id === account._id) {
+        accountExists = account._id;
+        this.toastr.error(`The account for ${account.name} is already added.`);
+      }
+    });
+    if (!accountExists) {
+      this.subscription.add(
+        this.companyService.companyBankInsert(this.companyId, account).subscribe(
+          () => {
+            this.getCompanyDetails(), this.toastr.success('New account added');
+          },
+          () => this.toastr.error('Error with adding the account.')
+        )
+      );
+    }
   }
 
   deleteAction(accountId: string, modal) {

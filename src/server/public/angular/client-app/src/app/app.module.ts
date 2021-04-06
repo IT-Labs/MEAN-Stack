@@ -13,6 +13,7 @@ import { LoginModule } from './auth/login.module';
 import { SvgIconsModule } from '@ngneat/svg-icon';
 import icons from '../assets/svg/svg-icons';
 import { ToastrModule } from 'ngx-toastr';
+import { KitchenSinkModule } from './kitchen-sink/kitchen-sink.module';
 
 const DECLARATIONS = [AppComponent, AppComponent];
 
@@ -27,6 +28,7 @@ const MODULES = [
   BanksModule,
   LayoutsModule,
   LoginModule,
+  KitchenSinkModule,
   ToastrModule.forRoot(),
   SvgIconsModule.forRoot({
     sizes: {

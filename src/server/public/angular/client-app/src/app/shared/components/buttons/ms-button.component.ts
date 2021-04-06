@@ -9,6 +9,8 @@ import { Component, Input } from '@angular/core';
       value="{{ value }}"
       class="{{ class }}"
       [routerLink]="routerLink"
+      disabled="{{ disabled }}"
+      [ngClass]="{ disabled: disabled }"
     >
       {{ value }}
     </button>
@@ -21,4 +23,5 @@ export class MsButtonComponent {
   @Input() class: string;
   @Input() size: string;
   @Input() routerLink: any;
+  @Input() disabled: boolean;
 }

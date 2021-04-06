@@ -10,15 +10,9 @@ import { SharedModule } from '../shared/components/shared.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { SvgIconsModule } from '@ngneat/svg-icon';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { CompanyAccountsModal } from './company-accounts-modal/company-accounts-modal';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 
-const DECLARATIONS = [
-  CompaniesComponent,
-  CompanyComponent,
-  CompanyAccountsComponent,
-  CompanyAccountsModal,
-];
+const DECLARATIONS = [CompaniesComponent, CompanyComponent, CompanyAccountsComponent];
 
 const MODULES = [
   ReactiveFormsModule,
